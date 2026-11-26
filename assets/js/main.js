@@ -1,3 +1,15 @@
+// Mobile navigation controls
+function closeMobileMenu() {
+  const menu = document.getElementById("mobileNavigation");
+  const toggle = document.getElementById("mobileMenuToggle");
+  if (menu) menu.classList.add("hidden");
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open navigation menu");
+    toggle.innerHTML = '<span aria-hidden="true">☰</span>';
+  }
+}
+
 // Idle logout, drag & drop, iframe height, boot
 
 // Idle Auto-Logout Timer (15 mins)
