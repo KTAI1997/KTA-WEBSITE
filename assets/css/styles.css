@@ -1,32 +1,347 @@
-/* K.T.A - custom styles (Tailwind loaded via CDN) */
-  body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: #f4f7fb;
-    color: #0f172a;
+/* K.T.A — refined visual system (Tailwind remains the layout utility layer) */
+:root {
+  color-scheme: light;
+  --kta-navy: #0b1936;
+  --kta-blue: #155eef;
+  --kta-cyan: #38bdf8;
+  --kta-teal: #0f9f9a;
+  --kta-ink: #10213d;
+  --kta-muted: #64748b;
+  --kta-surface: #ffffff;
+  --kta-page: #f3f7fc;
+  --kta-radius-lg: 1.25rem;
+  --kta-radius-xl: 1.75rem;
+  --kta-shadow-card: 0 16px 45px rgba(15, 35, 70, .09);
+  --kta-shadow-hover: 0 22px 55px rgba(15, 35, 70, .15);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--kta-page);
+  color: var(--kta-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  color: #fff;
+  background: #155eef;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button, a, select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease,
+              box-shadow .2s ease, transform .2s ease;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(56, 189, 248, .72);
+  outline-offset: 3px;
+}
+
+header.sticky {
+  background: rgba(11, 25, 54, .94);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 30px rgba(4, 14, 35, .16);
+}
+
+header nav {
+  letter-spacing: -.01em;
+}
+
+header nav > div > div {
+  margin-top: .45rem;
+  padding: .45rem;
+  border-radius: 1rem;
+  box-shadow: 0 18px 45px rgba(4, 14, 35, .2);
+}
+
+header nav > div > div button {
+  border-radius: .65rem;
+  padding-top: .65rem;
+  padding-bottom: .65rem;
+}
+
+.hero-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: clamp(3.5rem, 7vw, 6.5rem);
+  padding-bottom: clamp(4.5rem, 8vw, 7.5rem);
+  background:
+    linear-gradient(112deg, rgba(7, 19, 45, .94) 0%, rgba(11, 39, 83, .82) 48%, rgba(9, 92, 105, .64) 100%),
+    url('https://images.unsplash.com/photo-1503152394-c571994fd383?auto=format&fit=crop&w=2000&q=85') center 48%/cover no-repeat;
+}
+
+.hero-bg::before,
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(2px);
+}
+
+.hero-bg::before {
+  width: 34rem;
+  height: 34rem;
+  top: -22rem;
+  right: -8rem;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 0 0 3rem rgba(255,255,255,.025), 0 0 0 7rem rgba(255,255,255,.02);
+}
+
+.hero-bg::after {
+  width: 26rem;
+  height: 26rem;
+  bottom: -21rem;
+  left: -9rem;
+  background: rgba(56, 189, 248, .12);
+}
+
+.hero-bg h1 {
+  max-width: 56rem;
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+  text-shadow: 0 4px 24px rgba(0,0,0,.2);
+}
+
+.hero-bg p {
+  line-height: 1.8;
+}
+
+.hero-bg > div > .bg-white {
+  position: relative;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: var(--kta-radius-xl);
+  padding: clamp(1.15rem, 3vw, 2rem);
+  box-shadow: 0 28px 80px rgba(2, 12, 32, .28);
+}
+
+.hero-bg > div > .bg-white::before {
+  content: "";
+  position: absolute;
+  inset: 0 1.5rem auto;
+  height: 3px;
+  border-radius: 0 0 1rem 1rem;
+  background: linear-gradient(90deg, #38bdf8, #2dd4bf, #60a5fa);
+}
+
+#tabBookFlight, #tabFindRes {
+  min-height: 2.65rem;
+  padding-inline: 1.15rem;
+}
+
+#bookFlightForm label,
+#findReservationForm label {
+  letter-spacing: .055em;
+}
+
+#bookFlightForm input,
+#bookFlightForm select,
+#findReservationForm input,
+#findReservationForm select,
+#vistaMareSection input,
+#vistaMareSection select {
+  min-height: 2.85rem;
+  border-radius: .85rem;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+#bookFlightForm input:focus,
+#bookFlightForm select:focus,
+#findReservationForm input:focus,
+#findReservationForm select:focus {
+  background: #fff;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, .13);
+}
+
+#destinationsGrid > *,
+#vistaMareGrid > * {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--kta-radius-lg);
+  box-shadow: var(--kta-shadow-card);
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+#destinationsGrid > *:hover,
+#vistaMareGrid > *:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--kta-shadow-hover);
+}
+
+#vistaMareSection {
+  scroll-margin-top: 6rem;
+}
+
+#vistaMareSection > div {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 65px rgba(8, 39, 67, .18);
+}
+
+#vistaMareSection > div::after {
+  content: "";
+  position: absolute;
+  width: 24rem;
+  height: 24rem;
+  right: -13rem;
+  top: -14rem;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rem rgba(255,255,255,.025), 0 0 0 5rem rgba(255,255,255,.02);
+  pointer-events: none;
+}
+
+#trustFaqSection > div {
+  border-radius: var(--kta-radius-xl);
+  box-shadow: var(--kta-shadow-card);
+}
+
+#trustFaqSection h2,
+#trustFaqSection h3 {
+  letter-spacing: -.025em;
+}
+
+footer {
+  background-image: linear-gradient(135deg, rgba(11,25,54,1), rgba(8,39,73,1));
+}
+
+footer a, footer button {
+  transition: color .18s ease, opacity .18s ease;
+}
+
+footer a:hover, footer button:hover {
+  color: #7dd3fc;
+}
+
+#authModal > div,
+#infoModal > div {
+  box-shadow: 0 30px 90px rgba(2, 12, 32, .3);
+}
+
+#authModal input,
+#infoModal input {
+  min-height: 2.8rem;
+}
+
+.card-3d-wrap {
+  perspective: 1000px;
+}
+
+.card-3d {
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+  transform-style: preserve-3d;
+}
+
+.card-3d.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 1024px) {
+  header.sticky {
+    position: sticky;
   }
+
+  header nav {
+    gap: .85rem;
+  }
+
+  header nav > div > button {
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  header.sticky {
+    position: sticky;
+  }
+
+  header .max-w-7xl > .flex {
+    min-height: 4.25rem;
+    height: auto;
+    gap: .5rem;
+    padding-block: .55rem;
+  }
+
+  header #authArea button {
+    padding-inline: .65rem;
+  }
+
+  header #langSelect {
+    max-width: 5.2rem;
+  }
+
   .hero-bg {
-    background: linear-gradient(120deg, rgba(11, 25, 54, 0.90) 0%, rgba(15, 52, 108, 0.80) 55%, rgba(14, 116, 144, 0.74) 100%),
-                url('https://images.unsplash.com/photo-1503152394-c571994fd383?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  }
-  .card-3d-wrap {
-    perspective: 1000px;
-  }
-  .card-3d {
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-    transform-style: preserve-3d;
-  }
-  .card-3d.flipped {
-    transform: rotateY(180deg);
-  }
-  .card-face {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-  .card-back {
-    transform: rotateY(180deg);
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    background-position: 58% center;
   }
 
-  @media (max-width: 1024px) {
-    header.sticky { position: static; }
+  .hero-bg h1 {
+    font-size: clamp(2.15rem, 9vw, 3.2rem);
+    line-height: 1.1;
   }
 
+  .hero-bg > div > .bg-white {
+    border-radius: 1.35rem;
+  }
+
+  #tabBookFlight, #tabFindRes {
+    flex: 1;
+    padding-inline: .7rem;
+    font-size: .78rem;
+  }
+
+  #tripTypeControls {
+    width: 100%;
+    justify-content: flex-start;
+    padding-top: .15rem;
+  }
+
+  #vistaMareSection > div {
+    border-radius: 1.35rem;
+  }
+
+  #trustFaqSection > div {
+    border-radius: 1.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
