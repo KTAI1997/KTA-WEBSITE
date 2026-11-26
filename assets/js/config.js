@@ -24,8 +24,8 @@ const DEFAULT_FLIGHTS = [
 ];
 
 // Vista Mare Cyprus Units (Official room types from vistamarecyprus.com — rates checked live on website)
-const FALLBACK_RESORT_IMG = "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80";
-const FALLBACK_DEST_IMG = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80";
+const FALLBACK_RESORT_IMG = "https://vistamarecyprus.com/wp-content/uploads/2026/10/home-new-1-768x1024.webp";
+const FALLBACK_DEST_IMG = "https://vistamarecyprus.com/wp-content/uploads/2026/10/home-new-1-768x1024.webp";
 
 const VISTA_MARE_UNITS = [
   {
@@ -34,7 +34,7 @@ const VISTA_MARE_UNITS = [
     capacity: "Up to 2 guests • Loft",
     rateUSD: 0,
     priceNote: "Rates by Date • Check on Website",
-    img: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80",
+    img: "https://vistamarecyprus.com/wp-content/uploads/2026/10/03-07-scaled.webp",
     desc: "Modern loft room in Yeni İskele with outdoor pool access, Wi-Fi, housekeeping, and breakfast option."
   },
   {
@@ -43,7 +43,7 @@ const VISTA_MARE_UNITS = [
     capacity: "Up to 2 guests • Sea View",
     rateUSD: 0,
     priceNote: "Rates by Date • Check on Website",
-    img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80",
+    img: "https://vistamarecyprus.com/wp-content/uploads/2026/10/03-10-scaled.webp",
     desc: "Wake up to Mediterranean sea views on the east coast of Northern Cyprus with direct hotel service."
   },
   {
@@ -52,7 +52,7 @@ const VISTA_MARE_UNITS = [
     capacity: "Up to 2 guests • Mountain View",
     rateUSD: 0,
     priceNote: "Rates by Date • Check on Website",
-    img: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=80",
+    img: "https://vistamarecyprus.com/wp-content/uploads/2026/10/03-08-scaled.webp",
     desc: "Comfortable room overlooking the mountains in Yeni İskele with outdoor pool & guest parking."
   },
   {
@@ -61,7 +61,7 @@ const VISTA_MARE_UNITS = [
     capacity: "Standard, Deluxe & Premium • Loft Options",
     rateUSD: 0,
     priceNote: "Rates by Date • Check on Website",
-    img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80",
+    img: "https://vistamarecyprus.com/wp-content/uploads/2026/10/03-01-scaled.webp",
     desc: "Spacious seaside accommodation in Yeni İskele with optional Larnaca Airport (LCA) pick-up transfer."
   }
 ];
@@ -72,7 +72,7 @@ const DESTINATIONS = [
     title: "LARNACA + VISTA MARE",
     name: "Larnaca",
     fromPriceUSD: 140,
-    img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80",
+    img: "https://images.pexels.com/photos/36725370/pexels-photo-36725370.jpeg?auto=compress&cs=tinysrgb&w=1400",
     desc: "Discover Cyprus at your own pace, from the Larnaca waterfront to the island’s eastern coast. You can also explore a selected stay at Vista Mare in Yeni İskele."
   },
   {
