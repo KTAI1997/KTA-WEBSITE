@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://cdn.sheetjs.com https://fonts.googleapis.com https://fonts.gstatic.com https://images.unsplash.com https://direct.tranzila.com 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:;" />
+  <title>K.T.A v6 | Boarding Pass PNR, Vista Mare LCA & Tranzilla</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="description" content="K.T.A - Flights from Tel Aviv to Greece & Cyprus, charter network and Vista Mare stays." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Utility & Navigation Bar -->
+  <header class="bg-[#0b1936] text-white sticky top-0 z-40 shadow-lg border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-3">
+          <button onclick="resetHome()" class="flex items-center text-left group py-1">
+            <img src="assets/images/logo.png" alt="KTA International" class="h-8 sm:h-9 w-auto object-contain drop-shadow-[0_1px_10px_rgba(255,255,255,0.22)] group-hover:brightness-110 transition" />
+          </button>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <div class="relative group">
+            <button class="py-2 flex items-center gap-1 hover:text-sky-300 transition">
+              About US
+              <svg class="w-4 h-4 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-150 absolute left-0 mt-0 w-52 bg-white text-slate-800 rounded-xl shadow-xl border border-slate-100 py-2 z-50">
+              <button onclick="openInfoModal('about')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">About Us</button>
+              <button onclick="openInfoModal('operators')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Tour Operators</button>
+              <button onclick="openInfoModal('carriers')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Air Carriers</button>
+              <button onclick="openInfoModal('connect')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Connect With Us</button>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <button class="py-2 flex items-center gap-1 hover:text-sky-300 transition">
+              Terms
+              <svg class="w-4 h-4 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-150 absolute left-0 mt-0 w-56 bg-white text-slate-800 rounded-xl shadow-xl border border-slate-100 py-2 z-50">
+              <button onclick="openInfoModal('terms')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Terms & Conditions</button>
+              <button onclick="openInfoModal('health')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Travel & Health Information</button>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <button class="py-2 flex items-center gap-1 hover:text-sky-300 transition">
+              Destinations
+              <svg class="w-4 h-4 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-150 absolute left-0 mt-0 w-52 bg-white text-slate-800 rounded-xl shadow-xl border border-slate-100 py-2 z-50">
+              <button onclick="quickSelectDestination('ATH')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Athens (ATH)</button>
+              <button onclick="quickSelectDestination('SKG')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Thessaloniki (SKG)</button>
+              <button onclick="quickSelectDestination('LCA')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm font-semibold text-teal-700">Larnaca (LCA) + Vista Mare</button>
+              <button onclick="quickSelectDestination('HER')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Heraklion (HER)</button>
+              <button onclick="quickSelectDestination('RHO')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Rhodes (RHO)</button>
+              <button onclick="quickSelectDestination('PFO')" class="w-full text-left px-4 py-2 hover:bg-sky-50 hover:text-blue-700 text-sm">Paphos (PFO)</button>
+            </div>
+          </div>
+
+          <button onclick="scrollToVistaMare()" class="py-1.5 px-3 rounded-lg bg-teal-500/20 border border-teal-400/40 text-teal-200 hover:bg-teal-500/30 text-xs font-bold transition">
+            Vista Mare (LCA)
+          </button>
+        </nav>
+
+        <!-- Right Controls: Currency, Lang, Auth / Admin -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div class="flex items-center bg-white/10 rounded-lg p-0.5 text-xs font-bold">
+            <button id="currUSD" onclick="setCurrency('USD')" class="px-2.5 py-1 rounded-md bg-sky-500 text-white transition">$ USD</button>
+            <button id="currEUR" onclick="setCurrency('EUR')" class="px-2.5 py-1 rounded-md text-slate-200 hover:text-white transition">€ EUR</button>
+          </div>
+
+          <select id="langSelect" onchange="handleLangChange()" class="bg-white/10 text-xs font-semibold rounded-lg px-2 py-1.5 border border-white/15 focus:outline-none">
+            <option value="EN" class="text-slate-900">English</option>
+            <option value="TR" class="text-slate-900">Türkçe</option>
+            <option value="HE" class="text-slate-900">עברית</option>
+          </select>
+
+          <div id="authArea" class="flex items-center gap-2">
+            <button onclick="openAuthModal('login')" class="px-3 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold transition">
+              Login
+            </button>
+            <button onclick="openAuthModal('agent')" class="hidden sm:inline-block px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/15 transition">
+              Agent Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Panel Section (Visible when logged in as Admin) -->
+  <section id="adminSection" class="hidden bg-slate-900 text-white border-b-4 border-amber-400 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-amber-400 text-slate-950 uppercase tracking-wider">ADMIN CONSOLE</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold">K.T.A Operations, Security & Tranzilla</h2>
+          </div>
+          <p class="text-slate-400 text-sm mt-1">Manage Excel flights, users, Tranzilla terminal credentials, and security logs.</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="switchAdminTab('excel')" id="adminTabExcel" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-amber-400 text-slate-950 transition">
+            Flights (Excel)
+          </button>
+          <button onclick="switchAdminTab('tranzilla')" id="adminTabTranzilla" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
+            Tranzilla & Security
+          </button>
+          <button onclick="switchAdminTab('users')" id="adminTabUsers" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
+            Users & Roles
+          </button>
+          <button onclick="switchAdminTab('bookings')" id="adminTabBookings" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
+            PNR Bookings
+          </button>
+          <button onclick="switchAdminTab('database')" id="adminTabDatabase" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
+            Database (DB)
+          </button>
+          <button onclick="document.getElementById('adminSection').classList.add('hidden')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-rose-500/20 text-rose-300 hover:bg-rose-500/30">
+            Hide
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs text-slate-400 font-medium">Active Flights</div>
+          <div id="adminFlightCount" class="text-2xl font-extrabold text-sky-400 mt-1">0</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs text-slate-400 font-medium">Registered Users</div>
+          <div id="adminUserCount" class="text-2xl font-extrabold text-emerald-400 mt-1">0</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs text-slate-400 font-medium">Total Ticketed Revenue</div>
+          <div id="adminRevenueTotal" class="text-2xl font-extrabold text-amber-400 mt-1">$0</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs text-slate-400 font-medium">Tranzilla Terminal</div>
+          <div id="adminTranzillaStatus" class="text-base font-extrabold text-teal-400 mt-1.5 font-mono">ktairterm</div>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <div class="text-xs text-slate-400 font-medium">Database Mode</div>
+          <div id="adminDbModeStatus" class="text-base font-extrabold text-purple-300 mt-1.5 font-mono">LOCAL_STORAGE</div>
+        </div>
+      </div>
+
+      <!-- Tab 1: Excel Flight Upload -->
+      <div id="adminPaneExcel" class="bg-white/5 border border-white/10 rounded-2xl p-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+          <div>
+            <h3 class="text-lg font-bold text-white">Bulk Flight Upload via Excel / CSV</h3>
+            <p class="text-xs text-slate-300 mt-0.5">
+              Required columns: <code class="text-amber-300">FlightNo, Airline, From, To, DepTime, ArrTime, Duration, Stops, Cabin, PriceUSD, Seats</code>
+            </p>
+          </div>
+          <button onclick="downloadSampleExcel()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow transition flex items-center gap-2">
+            <span>⬇ Download Sample Template (.xlsx)</span>
+          </button>
+        </div>
+
+        <div id="dropZone" class="border-2 border-dashed border-sky-400/50 hover:border-sky-400 bg-sky-950/30 rounded-2xl p-8 text-center transition cursor-pointer" onclick="document.getElementById('excelFileInput').click()">
+          <input type="file" id="excelFileInput" accept=".xlsx,.xls,.csv" class="hidden" onchange="handleExcelFile(event)" />
+          <div class="text-3xl mb-2">📊</div>
+          <div class="text-sm font-bold text-white">Click to select or drag & drop your Excel (.xlsx, .xls) or CSV file</div>
+          <div class="text-xs text-slate-400 mt-1">All rows are sanitized against XSS and immediately added to the live search & filter engine</div>
+        </div>
+
+        <div id="uploadFeedback" class="mt-4 hidden p-3.5 rounded-xl text-sm font-semibold"></div>
+
+        <div class="mt-6 overflow-x-auto">
+          <h4 class="text-sm font-bold text-slate-200 mb-3">Current Flights Catalog (<span id="catalogTotalLabel">0</span> flights)</h4>
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-white/10 text-slate-400">
+                <th class="py-2 px-3">Flight No</th>
+                <th class="py-2 px-3">Airline</th>
+                <th class="py-2 px-3">Route</th>
+                <th class="py-2 px-3">Time</th>
+                <th class="py-2 px-3">Stops</th>
+                <th class="py-2 px-3">Cabin</th>
+                <th class="py-2 px-3">Price (USD)</th>
+                <th class="py-2 px-3">Seats</th>
+              </tr>
+            </thead>
+            <tbody id="adminFlightsTableBody" class="divide-y divide-white/5 text-slate-200"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Tranzilla & Security Configuration -->
+      <div id="adminPaneTranzilla" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-slate-800/70 rounded-2xl p-5 border border-white/10">
+            <h3 class="text-base font-extrabold text-teal-300 mb-2">Tranzilla Payment Gateway Settings</h3>
+            <p class="text-xs text-slate-300 mb-4">Configure your Tranzilla Supplier/Terminal ID and integration mode for live or sandbox checkout.</p>
+            <form onsubmit="saveTranzillaConfig(event)" class="space-y-3 text-xs">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Tranzilla Terminal / Supplier Name</label>
+                <input id="tzTerminalInput" type="text" required value="ktairterm" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Integration Mode</label>
+                <select id="tzModeInput" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-white/15 text-white">
+                  <option value="HOSTED_IFRAME">Tranzilla Hosted / Iframe (PCI-DSS SAQ-A)</option>
+                  <option value="TOKEN_API">Tranzilla Tokenization + Backend API</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Backend Signing Endpoint (Optional)</label>
+                <input id="tzEndpointInput" type="url" placeholder="https://api.ktair.net/payments/tranzilla/init" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+              </div>
+              <button type="submit" class="px-4 py-2.5 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold">
+                Save Tranzilla Settings
+              </button>
+            </form>
+          </div>
+
+          <div class="bg-slate-800/70 rounded-2xl p-5 border border-white/10">
+            <h3 class="text-base font-extrabold text-amber-300 mb-2">Active Security Protections</h3>
+            <ul class="space-y-2 text-xs text-slate-300">
+              <li>✅ <strong>Cryptographic PNR Entropy:</strong> Uses <code>crypto.getRandomValues()</code> instead of predictable PRNGs.</li>
+              <li>✅ <strong>Zero Card Persistence:</strong> Full PAN & CVV are never written to <code>localStorage</code> or session storage.</li>
+              <li>✅ <strong>Brute-Force Login Lockout:</strong> Blocks login for 60s after 5 consecutive failed password attempts.</li>
+              <li>✅ <strong>XSS Output Sanitization:</strong> Escapes all user-supplied & Excel-imported strings before DOM rendering.</li>
+              <li>✅ <strong>Inactivity Auto-Lock:</strong> Automatically logs out idle admin sessions after 15 minutes.</li>
+            </ul>
+            <div class="mt-4 pt-3 border-t border-white/10">
+              <div class="text-[11px] font-bold text-slate-400 uppercase mb-2">Recent Security Audit Log</div>
+              <div id="securityAuditList" class="space-y-1 text-[11px] font-mono text-slate-300 max-h-32 overflow-y-auto"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Users Management -->
+      <div id="adminPaneUsers" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6">
+        <h3 class="text-lg font-bold mb-4">Add New User</h3>
+        <form onsubmit="addUserFromAdmin(event)" class="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-6">
+          <input id="newUserFirst" type="text" required placeholder="First Name" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
+          <input id="newUserLast" type="text" required placeholder="Last Name" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
+          <input id="newUserEmail" type="email" required placeholder="Email" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
+          <input id="newUserPass" type="text" required placeholder="Password" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
+          <div class="flex gap-2">
+            <select id="newUserRole" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white flex-1">
+              <option value="admin">admin</option>
+              <option value="agent">agent</option>
+              <option value="customer">customer</option>
+            </select>
+            <button type="submit" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 font-bold text-xs text-white">Add</button>
+          </div>
+        </form>
+        <div id="adminUsersList" class="space-y-2"></div>
+      </div>
+
+      <!-- Tab 4: PNR Bookings -->
+      <div id="adminPaneBookings" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="text-lg font-bold text-white">Issued Bookings & PNRs List</h3>
+            <p class="text-xs text-slate-400">All generated PNRs, passengers, routes, Tranzilla references, and Vista Mare stays in one list.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <input
+              type="text"
+              id="adminPnrSearchInput"
+              oninput="renderAdminBookings()"
+              placeholder="Search PNR, passenger, route..."
+              class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-xs text-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+            />
+            <select
+              id="adminPnrStayFilter"
+              onchange="renderAdminBookings()"
+              class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-xs text-white font-semibold"
+            >
+              <option value="ALL">All PNRs</option>
+              <option value="WITH_STAY">With Vista Mare Stay</option>
+              <option value="FLIGHT_ONLY">Flight Only</option>
+            </select>
+            <button
+              type="button"
+              onclick="exportPnrsCSV()"
+              class="px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs transition"
+            >
+              ⬇ Export CSV
+            </button>
+          </div>
+        </div>
+
+        <div id="adminPnrSummaryBar" class="flex flex-wrap items-center gap-3 text-xs text-slate-300 bg-slate-800/60 px-4 py-2.5 rounded-xl border border-white/10"></div>
+
+        <div class="overflow-x-auto rounded-xl border border-white/10">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead class="bg-slate-800/90 text-slate-300 uppercase text-[11px]">
+              <tr>
+                <th class="py-3 px-3">PNR</th>
+                <th class="py-3 px-3">Passenger(s)</th>
+                <th class="py-3 px-3">Route & Flight</th>
+                <th class="py-3 px-3">Date / Created</th>
+                <th class="py-3 px-3">Tranzilla / Status</th>
+                <th class="py-3 px-3">Total</th>
+                <th class="py-3 px-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminBookingsList" class="divide-y divide-white/10 bg-slate-900/40 text-slate-200"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 5: Database Connection & Schema Readiness -->
+      <div id="adminPaneDatabase" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-purple-400/20 text-purple-200 border border-purple-400/30 uppercase">DB Adapter Ready</span>
+              <h3 class="text-lg font-bold text-white">Database Connection Settings & Readiness</h3>
+            </div>
+            <p class="text-xs text-slate-300 mt-1">
+              Store your future database provider, endpoint/URL, API key/token, and table mapping now. When you are ready to connect, switch mode to <strong>REST / Cloud DB</strong> and sync local records.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="dbConnectionBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-slate-700 text-slate-200 font-mono">
+              MODE: LOCAL_STORAGE
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- DB Connection Config Form (7 cols) -->
+          <form onsubmit="saveDatabaseConfig(event)" class="lg:col-span-7 bg-slate-800/70 rounded-2xl p-5 border border-white/10 space-y-4 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Storage / Driver Mode</label>
+                <select id="dbModeInput" onchange="syncDbUiPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-semibold">
+                  <option value="LOCAL_STORAGE">Local Browser Storage Only (Current)</option>
+                  <option value="REST_API">REST API / Custom Backend (Ready)</option>
+                  <option value="SUPABASE_REST">Supabase PostgREST (Ready)</option>
+                  <option value="FIREBASE_REST">Firebase Firestore REST (Ready)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Environment</label>
+                <select id="dbEnvInput" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-semibold">
+                  <option value="staging">Staging / Sandbox</option>
+                  <option value="production">Production</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-slate-400 font-bold mb-1">Database / API Base URL</label>
+              <input id="dbUrlInput" type="url" placeholder="https://xyz.supabase.co/rest/v1 or https://api.ktair.net/v1" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Public / Anon API Key (Optional)</label>
+                <input id="dbApiKeyInput" type="password" autocomplete="off" placeholder="eyJ... or pk_..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+              </div>
+              <div>
+                <label class="block text-slate-400 font-bold mb-1">Auth Header Type</label>
+                <select id="dbAuthTypeInput" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-semibold">
+                  <option value="Bearer">Authorization: Bearer &lt;key&gt;</option>
+                  <option value="ApiKey">apikey: &lt;key&gt;</option>
+                  <option value="None">No Key / Cookie Session</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-white/10">
+              <div class="text-[11px] font-bold text-purple-300 uppercase mb-2">Target Table / Collection Names</div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-slate-400 font-semibold mb-1">Flights Table</label>
+                  <input id="dbTableFlightsInput" type="text" value="flights" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+                </div>
+                <div>
+                  <label class="block text-slate-400 font-semibold mb-1">Bookings Table</label>
+                  <input id="dbTableBookingsInput" type="text" value="bookings" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+                </div>
+                <div>
+                  <label class="block text-slate-400 font-semibold mb-1">Users Table</label>
+                  <input id="dbTableUsersInput" type="text" value="users" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
+                </div>
+              </div>
+            </div>
+
+            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer pt-1">
+              <input id="dbAutoSyncInput" type="checkbox" class="accent-purple-400" />
+              Mirror writes to remote DB automatically when mode is not <code>LOCAL_STORAGE</code>
+            </label>
+
+            <div id="dbFeedbackBanner" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+            <div class="flex flex-wrap items-center gap-2.5 pt-2">
+              <button type="submit" class="px-4 py-2.5 rounded-xl bg-purple-400 hover:bg-purple-300 text-slate-950 font-extrabold transition">
+                Save DB Settings
+              </button>
+              <button type="button" onclick="testDatabaseConnection()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold border border-white/15 transition">
+                Test Endpoint
+              </button>
+              <button type="button" onclick="exportLocalSnapshotJSON()" class="px-4 py-2.5 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 font-bold border border-sky-400/30 transition">
+                Export JSON Snapshot
+              </button>
+              <button type="button" onclick="pushLocalSnapshotToDB()" class="px-4 py-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 font-bold border border-emerald-400/30 transition">
+                Sync Local → DB
+              </button>
+            </div>
+          </form>
+
+          <!-- DB Readiness & Adapter Status (5 cols) -->
+          <div class="lg:col-span-5 bg-slate-800/70 rounded-2xl p-5 border border-white/10 flex flex-col justify-between space-y-4 text-xs">
+            <div>
+              <h4 class="text-sm font-extrabold text-purple-300 mb-2">Infrastructure Readiness Checklist</h4>
+              <ul class="space-y-2 text-slate-300">
+                <li>✅ <strong>Database Config Vault:</strong> Provider, URL, auth type, and table names saved locally in <code>kta_db_config</code>.</li>
+                <li>✅ <strong>Centralized DB Adapter (<code>KTA_DB</code>):</strong> Ready for <code>flights</code>, <code>bookings</code>, and <code>users</code> read/write hooks.</li>
+                <li>✅ <strong>JSON Backup & Migration:</strong> Export all flights, bookings, and users anytime before migrating to a live server.</li>
+                <li>⏳ <strong>Live Remote Sync:</strong> Stays safely in <code>LOCAL_STORAGE</code> until you set a URL and switch mode.</li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-950/70 rounded-xl p-3.5 border border-white/10">
+              <div class="flex items-center justify-between text-[11px] font-bold text-slate-400 uppercase mb-1.5">
+                <span>Active Adapter Payload Preview</span>
+                <span id="dbLastTestLabel" class="text-purple-300 font-mono">Not tested</span>
+              </div>
+              <pre id="dbAdapterPreview" class="text-[11px] font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero & Search Engine -->
+  <section class="hero-bg text-white pt-10 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-8">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-xs font-semibold text-sky-200">
+            ✈ K.T.A Aviation & Charter Network
+          </span>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-xs font-semibold text-emerald-200">
+            🔒 Secured by Tranzilla PCI-DSS
+          </span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          Fly Seamless to Greece & Cyprus with K.T.A
+        </h1>
+        <p class="text-slate-200 text-sm sm:text-base mt-3 max-w-2xl">
+          Direct & connecting flights from Tel Aviv (TLV) to Athens, Thessaloniki, Larnaca (LCA), Heraklion, Rhodes & Paphos — with integrated <strong>Vista Mare Cyprus</strong> sea-view stays for LCA passengers.
+        </p>
+      </div>
+
+      <!-- Search / Find Reservation Box -->
+      <div class="bg-white text-slate-900 rounded-3xl shadow-2xl p-5 sm:p-7 border border-slate-100">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-5">
+          <div class="flex gap-2">
+            <button id="tabBookFlight" onclick="switchSearchTab('book')" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#0b1936] text-white transition">
+              Book Flight
+            </button>
+            <button id="tabFindRes" onclick="switchSearchTab('find')" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
+              Find Reservation
+            </button>
+          </div>
+
+          <div id="tripTypeControls" class="flex items-center gap-4 text-xs sm:text-sm font-semibold">
+            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="tripType" value="roundtrip" checked onchange="toggleReturnDate()" class="accent-blue-600" />
+              Roundtrip
+            </label>
+            <label class="inline-flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="tripType" value="oneway" onchange="toggleReturnDate()" class="accent-blue-600" />
+              One-way
+            </label>
+          </div>
+        </div>
+
+        <!-- Book Flight Form -->
+        <form id="bookFlightForm" onsubmit="handleSearchFlights(event)" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+            <div class="md:col-span-3">
+              <label class="block text-xs font-bold text-slate-500 uppercase mb-1">From</label>
+              <select id="searchFrom" onchange="onRouteChange()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                <option value="TLV" selected>Tel Aviv (TLV)</option>
+                <option value="ATH">Athens (ATH)</option>
+                <option value="SKG">Thessaloniki (SKG)</option>
+                <option value="LCA">Larnaca (LCA)</option>
+                <option value="HER">Heraklion (HER)</option>
+                <option value="RHO">Rhodes (RHO)</option>
+                <option value="PFO">Paphos (PFO)</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-1 flex justify-center">
+              <button type="button" onclick="swapAirports()" title="Swap Airports" class="p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-blue-700 border border-sky-200 transition">
+                ⇄
+              </button>
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-xs font-bold text-slate-500 uppercase mb-1">To</label>
+              <select id="searchTo" onchange="onRouteChange()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                <option value="ALL">All Destinations</option>
+                <option value="ATH">Athens (ATH)</option>
+                <option value="SKG">Thessaloniki (SKG)</option>
+                <option value="LCA" selected>Larnaca (LCA) • Vista Mare</option>
+                <option value="HER">Heraklion (HER)</option>
+                <option value="RHO">Rhodes (RHO)</option>
+                <option value="PFO">Paphos (PFO)</option>
+                <option value="TLV">Tel Aviv (TLV)</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Depart</label>
+              <input id="searchDepart" type="date" required class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500" />
+            </div>
+
+            <div class="md:col-span-3" id="returnDateWrapper">
+              <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Return</label>
+              <input id="searchReturn" type="date" class="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 items-center">
+            <div class="flex items-center justify-between px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50">
+              <div>
+                <div class="text-xs font-bold text-slate-800">Adults</div>
+                <div class="text-[11px] text-slate-500">12+ yrs</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="changePax('adults', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold hover:bg-slate-100">-</button>
+                <span id="paxAdults" class="font-bold text-sm w-4 text-center">1</span>
+                <button type="button" onclick="changePax('adults', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold hover:bg-slate-100">+</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50">
+              <div>
+                <div class="text-xs font-bold text-slate-800">Kids</div>
+                <div class="text-[11px] text-slate-500">Age 2–11</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="changePax('kids', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold hover:bg-slate-100">-</button>
+                <span id="paxKids" class="font-bold text-sm w-4 text-center">0</span>
+                <button type="button" onclick="changePax('kids', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold hover:bg-slate-100">+</button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50">
+              <div>
+                <div class="text-xs font-bold text-slate-800">Infants</div>
+                <div class="text-[11px] text-slate-500">On lap</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="changePax('infants', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold hover:bg-slate-100">-</button>
+                <span id="paxInfants" class="font-bold text-sm w-4 text-center">0</span>
+                <button type="button" onclick="changePax('infants', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-200 font-bold hover:bg-slate-100">+</button>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-extrabold text-sm shadow-lg shadow-blue-600/25 transition">
+              Search Flights
+            </button>
+          </div>
+        </form>
+
+        <!-- Find Reservation Form -->
+        <div id="findReservationBox" class="hidden space-y-4">
+          <form onsubmit="handleFindReservation(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Booking Ref (PNR)</label>
+              <input id="pnrInput" type="text" required placeholder="e.g. KTA8X2P" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 uppercase font-bold text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Last Name</label>
+              <input id="pnrLastNameInput" type="text" required placeholder="Passenger Last Name" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500" />
+            </div>
+            <button type="submit" class="w-full py-3 px-6 rounded-xl bg-[#0b1936] hover:bg-slate-800 text-white font-bold text-sm transition">
+              Find Reservation
+            </button>
+          </form>
+          <div id="pnrResultBox" class="hidden"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-Step Flight Filtering, Vista Mare Add-on, Passenger Details & Tranzilla Checkout -->
+  <section id="bookingFlowSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-14">
+    <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-8">
+      <!-- Stepper Header -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-5 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Interactive Flight & Stay Booking</span>
+          <h2 id="flowTitle" class="text-xl sm:text-2xl font-extrabold text-slate-900">Available Flights & Filters</h2>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-bold">
+          <span id="stepBadge1" class="px-3 py-1.5 rounded-full bg-blue-600 text-white">1. Flights</span>
+          <span id="stepBadge2" class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-500">2. Passengers & Stay</span>
+          <span id="stepBadge3" class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-500">3. Tranzilla Pay</span>
+          <span id="stepBadge4" class="px-3 py-1.5 rounded-full bg-slate-100 text-slate-500">4. E-Ticket</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Filters & Flight Results + Contextual LCA Vista Mare Banner -->
+      <div id="step1Pane">
+        <!-- Contextual Vista Mare LCA Highlight Banner -->
+        <div id="lcaVistaBanner" class="mb-6 rounded-2xl bg-gradient-to-r from-teal-900 via-cyan-900 to-[#0b1936] text-white p-5 sm:p-6 shadow-lg border border-teal-400/30">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                <span class="px-2.5 py-0.5 rounded-full bg-teal-400 text-slate-950 text-[11px] font-extrabold uppercase">Larnaca (LCA) Arrival Partner</span>
+                <span class="text-xs text-teal-200 font-semibold">Vistamare Premium Residence & Hotel • Yeni İskele, Cyprus</span>
+              </div>
+              <h3 class="text-lg sm:text-xl font-extrabold">Flying to Larnaca (LCA)? Reserve Your Sea-View Apartment at Vista Mare</h3>
+              <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-3xl">
+                Wake up to Mediterranean sea views in Yeni İskele. Choose from <strong>Standard (Loft)</strong>, <strong>Standard Sea View</strong>, <strong>Standard Mountain View</strong>, or <strong>Deluxe Residence</strong> with optional LCA airport pick-up.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+              <button type="button" onclick="scrollToVistaMare()" class="px-4 py-2.5 rounded-xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-extrabold text-xs shadow transition">
+                View Vista Mare Apartments ↓
+              </button>
+              <a href="https://vistamarecyprus.com/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition">
+                vistamarecyprus.com ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200/70 mb-6">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Cabin Class</label>
+            <select id="filterCabin" onchange="renderFlightResults()" class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold">
+              <option value="ALL">All Cabins</option>
+              <option value="Economy">Economy</option>
+              <option value="Flex">Flex</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Stops</label>
+            <select id="filterStops" onchange="renderFlightResults()" class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold">
+              <option value="ALL">Any Stops</option>
+              <option value="0">Direct (0 Stop)</option>
+              <option value="1">1 Stop</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Departure Window</label>
+            <select id="filterTime" onchange="renderFlightResults()" class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold">
+              <option value="ALL">Any Time</option>
+              <option value="MORNING">Morning (05:00–11:59)</option>
+              <option value="AFTERNOON">Afternoon (12:00–17:59)</option>
+              <option value="EVENING">Evening (18:00–23:59)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-slate-500 uppercase mb-1">Sort By</label>
+            <select id="filterSort" onchange="renderFlightResults()" class="w-full px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold">
+              <option value="PRICE_ASC">Price: Low to High</option>
+              <option value="PRICE_DESC">Price: High to Low</option>
+              <option value="DEP_ASC">Departure Time</option>
+            </select>
+          </div>
+
+          <div class="flex items-end">
+            <button type="button" onclick="resetFilters()" class="w-full py-2 px-3 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 transition">
+              Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <div id="flightResultsList" class="space-y-3"></div>
+      </div>
+
+      <!-- STEP 2: Passenger Details + Optional Vista Mare LCA Residence Add-On -->
+      <div id="step2Pane" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <form id="passengerForm" onsubmit="goToPaymentStep(event)" class="lg:col-span-2 space-y-5">
+            <div id="passengerFormsContainer" class="space-y-4"></div>
+
+            <!-- Optional Vista Mare Room Add-on Box (Automatically emphasized for LCA flights) -->
+            <div id="step2VistaAddonBox" class="bg-teal-50/70 rounded-2xl p-5 border border-teal-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div>
+                  <span class="text-[11px] font-extrabold uppercase tracking-wider text-teal-700">Vista Mare Residence & Hotel (Yeni İskele)</span>
+                  <h3 class="font-extrabold text-slate-900 text-base">Add Cyprus Stay to Your Flight Booking</h3>
+                </div>
+                <a href="https://vistamarecyprus.com/" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-teal-700 hover:underline">
+                  vistamarecyprus.com ↗
+                </a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Select Vista Mare Apartment / Room</label>
+                  <select id="step2VistaRoomSelect" onchange="updateVistaAddonFromStep2()" class="w-full px-3.5 py-2.5 rounded-xl border border-teal-200 bg-white text-sm font-semibold">
+                    <option value="">No hotel stay needed</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">Nights</label>
+                  <input id="step2VistaNights" type="number" min="1" max="30" value="3" onchange="updateVistaAddonFromStep2()" class="w-full px-3.5 py-2.5 rounded-xl border border-teal-200 bg-white text-sm font-bold" />
+                </div>
+              </div>
+              <label class="inline-flex items-center gap-2 mt-3 text-xs font-semibold text-slate-700 cursor-pointer">
+                <input id="step2VistaTransfer" type="checkbox" onchange="updateVistaAddonFromStep2()" class="accent-teal-600" />
+                Include Private Larnaca Airport (LCA) ↔ Vista Mare Pick-up Transfer (+$45)
+              </label>
+            </div>
+
+            <!-- Fare Rules & Baggage Transparency Box (Trust Signal) -->
+            <div class="bg-sky-50/70 rounded-2xl p-5 border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                <h3 class="font-extrabold text-slate-900 text-sm">Fare Conditions, Baggage & E-Ticket Guarantee</h3>
+                <span class="px-2.5 py-0.5 rounded-full bg-sky-600 text-white text-[10px] font-extrabold uppercase">Transparent Terms</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs text-slate-700">
+                <div class="bg-white p-3 rounded-xl border border-sky-100">
+                  <div class="font-extrabold text-slate-900">Cabin & Checked Bag</div>
+                  <div class="text-slate-600 mt-0.5">8 kg cabin bag included; checked allowance & seat rules shown per fare class.</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-sky-100">
+                  <div class="font-extrabold text-slate-900">Changes & Support</div>
+                  <div class="text-slate-600 mt-0.5">Direct K.T.A operations support (+972 3 510 05 99) for date/name assistance.</div>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-sky-100">
+                  <div class="font-extrabold text-slate-900">Instant PNR & E-Ticket</div>
+                  <div class="text-slate-600 mt-0.5">PNR, 376- ticket number & Tranzilla receipt issued immediately upon approval.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
+              <h3 class="font-bold text-slate-900 mb-3">Contact Information</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Email Address</label>
+                  <input id="contactEmail" type="email" required placeholder="passenger@example.com" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 mb-1">Phone Number</label>
+                  <input id="contactPhone" type="tel" required value="+972 " class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm" />
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <button type="button" onclick="setFlowStep(1)" class="px-5 py-2.5 rounded-xl border border-slate-200 font-bold text-sm text-slate-700 hover:bg-slate-50">
+                ← Back to Flights
+              </button>
+              <button type="submit" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow">
+                Continue to Tranzilla Checkout →
+              </button>
+            </div>
+          </form>
+
+          <div id="summaryStep2" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 h-fit"></div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Tranzilla Credit Card Checkout -->
+      <div id="step3Pane" class="hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <form id="paymentForm" onsubmit="processTranzillaPayment(event)" class="lg:col-span-2 space-y-5">
+            <!-- Tranzilla Security Header -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900 text-white px-4 py-3 rounded-2xl">
+              <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-extrabold text-sm">🔒</span>
+                <div>
+                  <div class="text-xs font-extrabold tracking-wide">TRANZILLA SECURE PAYMENT GATEWAY</div>
+                  <div class="text-[11px] text-slate-400">Terminal: <span id="checkoutTzTerminal" class="font-mono text-teal-300">ktairterm</span> • 256-bit TLS & PCI-DSS Level 1</div>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-lg bg-white/10 text-[11px] font-bold text-sky-300">3D-Secure Ready</span>
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs text-emerald-950 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <strong>Zero Card Storage & Instant Issuance:</strong> Your full card number and CVV are processed via Tranzilla and never saved in browser storage. Your PNR and E-Ticket appear immediately after payment.
+              </div>
+              <div class="font-bold text-emerald-800 whitespace-nowrap">Support: +972 3 510 05 99</div>
+            </div>
+
+            <!-- Live 3D Card Preview -->
+            <div class="card-3d-wrap max-w-md mx-auto">
+              <div id="card3D" class="card-3d relative h-52 w-full rounded-2xl shadow-2xl">
+                <!-- Front -->
+                <div class="card-face absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0f295a] via-[#17469e] to-[#0891b2] text-white p-6 flex flex-col justify-between">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold tracking-widest uppercase text-sky-200">K.T.A • TRANZILLA</span>
+                    <span id="cardBrandBadge" class="px-2.5 py-0.5 rounded bg-white/15 text-xs font-extrabold tracking-wider">CARD</span>
+                  </div>
+                  <div id="previewCardNumber" class="text-xl sm:text-2xl font-mono tracking-widest font-bold">
+                    •••• •••• •••• ••••
+                  </div>
+                  <div class="flex items-end justify-between text-xs">
+                    <div>
+                      <div class="text-sky-200/80 text-[10px] uppercase">Card Holder</div>
+                      <div id="previewCardHolder" class="font-bold tracking-wide uppercase text-sm mt-0.5">FULL NAME</div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-sky-200/80 text-[10px] uppercase">Expires</div>
+                      <div id="previewCardExpiry" class="font-mono font-bold text-sm mt-0.5">MM/YY</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Back -->
+                <div class="card-face card-back absolute inset-0 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-950 text-white flex flex-col justify-between py-5">
+                  <div class="w-full h-10 bg-black/80 mt-2"></div>
+                  <div class="px-6">
+                    <div class="text-[10px] uppercase text-slate-400 mb-1 text-right">Security Code (CVV)</div>
+                    <div id="previewCardCvv" class="bg-white text-slate-900 font-mono font-bold text-right px-3 py-1.5 rounded text-sm">
+                      •••
+                    </div>
+                  </div>
+                  <div class="px-6 text-[10px] text-slate-400">Encrypted Tranzilla Tokenization • No CVV Stored</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Inputs -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-slate-600 mb-1">Cardholder Name</label>
+                <input id="cardHolderInput" type="text" required autocomplete="cc-name" placeholder="Name on Card" oninput="updateCardPreview()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold uppercase" />
+              </div>
+
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-slate-600 mb-1">Card Number</label>
+                <input id="cardNumberInput" type="text" maxlength="19" required autocomplete="cc-number" placeholder="1234 5678 9012 3456" oninput="formatAndPreviewCardNumber()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-mono font-bold" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Expiry Date (MM/YY)</label>
+                <input id="cardExpiryInput" type="text" maxlength="5" required autocomplete="cc-exp" placeholder="08/28" oninput="formatAndPreviewExpiry()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-mono font-bold" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">CVV / CVC</label>
+                <input id="cardCvvInput" type="password" maxlength="4" required autocomplete="cc-csc" placeholder="•••" onfocus="flipCard(true)" onblur="flipCard(false)" oninput="updateCardPreview()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-mono font-bold" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">ID / Passport (Tranzilla Verification)</label>
+                <input id="cardOwnerIdInput" type="text" required placeholder="ID or Passport Number" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-mono" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">Installments (Tashlumim)</label>
+                <select id="tranzillaInstallments" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold">
+                  <option value="1">1 Payment (Regular)</option>
+                  <option value="2">2 Installments</option>
+                  <option value="3">3 Installments</option>
+                  <option value="6">6 Installments</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Promo Code -->
+            <div class="flex gap-2">
+              <input id="promoCodeInput" type="text" placeholder="Promo code (try KTA10 for 10% off)" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm uppercase font-semibold" />
+              <button type="button" onclick="applyPromoCode()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold">
+                Apply Code
+              </button>
+            </div>
+            <div id="promoStatusMsg" class="text-xs font-semibold"></div>
+
+            <div class="flex items-center justify-between pt-2">
+              <button type="button" onclick="setFlowStep(2)" class="px-5 py-2.5 rounded-xl border border-slate-200 font-bold text-sm text-slate-700 hover:bg-slate-50">
+                ← Back
+              </button>
+              <button id="tranzillaPayBtn" type="submit" class="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/25">
+                Pay via Tranzilla & Issue Ticket
+              </button>
+            </div>
+          </form>
+
+          <!-- Order Summary -->
+          <div id="summaryStep3" class="bg-slate-50 rounded-2xl p-5 border border-slate-200 h-fit"></div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Confirmed E-Ticket & PNR -->
+      <div id="step4Pane" class="hidden">
+        <div id="ticketConfirmationBox" class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-6"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vista Mare Residence & Hotel Section (Dedicated for LCA Flyers & Cyprus Stays) -->
+  <section id="vistaMareSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <div class="bg-gradient-to-br from-[#0b1936] via-[#0f2c59] to-[#0d5c63] text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-teal-400/20">
+      <div class="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="px-3 py-1 rounded-full bg-teal-400 text-slate-950 text-xs font-extrabold uppercase tracking-wider">LCA Flight + Stay Partner</span>
+            <span class="text-xs text-teal-200 font-semibold">Yeni İskele, Northern Cyprus • +90 548 859 00 34</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold">Vistamare Premium Residence & Hotel</h2>
+          <p class="text-slate-200 text-sm mt-2 max-w-2xl">
+            Flying into <strong>Larnaca (LCA)</strong>? Reserve your sea-view apartment or loft room directly with Vistamare — featuring outdoor pools, breakfast, Wi-Fi, free parking, and private airport pick-up.
+          </p>
+        </div>
+        <a href="https://vistamarecyprus.com/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition">
+          Visit Official Site (vistamarecyprus.com) ↗
+        </a>
+      </div>
+
+      <!-- Vista Mare Quick Stay Calculator Bar -->
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 bg-white/10 backdrop-blur rounded-2xl p-4 mb-8 border border-white/15">
+        <div>
+          <label class="block text-[11px] font-bold text-teal-200 uppercase mb-1">Check-in Date</label>
+          <input id="vmCheckIn" type="date" class="w-full px-3 py-2 rounded-xl bg-slate-900/80 border border-white/15 text-white text-xs font-semibold" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-teal-200 uppercase mb-1">Nights</label>
+          <select id="vmNightsSelect" onchange="renderVistaMareCards()" class="w-full px-3 py-2 rounded-xl bg-slate-900/80 border border-white/15 text-white text-xs font-bold">
+            <option value="2">2 Nights</option>
+            <option value="3" selected>3 Nights</option>
+            <option value="4">4 Nights</option>
+            <option value="5">5 Nights</option>
+            <option value="7">7 Nights</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-teal-200 uppercase mb-1">Guests</label>
+          <select id="vmGuestsSelect" class="w-full px-3 py-2 rounded-xl bg-slate-900/80 border border-white/15 text-white text-xs font-bold">
+            <option value="2 Adults">2 Adults</option>
+            <option value="2 Adults, 1 Child">2 Adults, 1 Child</option>
+            <option value="2 Adults, 2 Children">2 Adults, 2 Children</option>
+          </select>
+        </div>
+        <div class="flex items-end">
+          <div class="text-xs text-teal-200 leading-snug">
+            ✓ Direct Hotel Rate<br/>✓ Optional LCA Airport Pick-up
+          </div>
+        </div>
+      </div>
+
+      <!-- Vista Mare Units Grid -->
+      <div id="vistaMareGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- Best Place Destinations Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-sky-600">ktair.net Destinations</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Best Place Destinations</h2>
+      </div>
+      <p class="text-sm text-slate-500">Select any destination to prefill the flight search engine.</p>
+    </div>
+
+    <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Trust, Partner Verification & Frequently Asked Questions -->
+  <section id="trustFaqSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <div class="bg-white rounded-3xl shadow-lg border border-slate-100 p-6 sm:p-9 space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+          <div class="text-xs font-extrabold text-blue-700 uppercase">Verified Carrier & Charter Network</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-1">Cyprus Airways, Aegean & Partners</div>
+          <p class="text-xs text-slate-600 mt-1">Scheduled & charter capacity coordination across TLV, LCA, ATH, SKG, HER, RHO & PFO.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-teal-50/70 border border-teal-200/80">
+          <div class="text-xs font-extrabold text-teal-800 uppercase">Official LCA Stay Partner</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-1">Vistamare Yeni İskele</div>
+          <p class="text-xs text-slate-600 mt-1">Sea & mountain view rooms with optional Larnaca Airport (LCA) pick-up transfer.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
+          <div class="text-xs font-extrabold text-emerald-800 uppercase">Protected Checkout</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-1">Tranzilla 3D-Secure</div>
+          <p class="text-xs text-slate-600 mt-1">Encrypted card authorization with Luhn validation and zero card data stored locally.</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-sky-50/70 border border-sky-200/80">
+          <div class="text-xs font-extrabold text-sky-800 uppercase">Direct Human Support</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-1">+972 3 510 05 99</div>
+          <p class="text-xs text-slate-600 mt-1">Email <strong>service@ktair.net</strong> for PNR lookup, group requests & travel assistance.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex flex-wrap items-end justify-between gap-2 mb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Passenger Help Center</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Frequently Asked Questions (FAQ)</h2>
+          </div>
+          <span class="text-xs text-slate-500">Clear answers before you book</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+            <h3 class="font-extrabold text-slate-900 text-sm">How do I view or print my Boarding Pass / E-Ticket?</h3>
+            <p class="text-slate-600 mt-1.5 leading-relaxed">Select <strong>Find Reservation</strong> at the top search box, enter your <strong>PNR code</strong> (e.g. KTA...) and passenger <strong>Last Name</strong> to display your boarding pass, barcode, and print/save options.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+            <h3 class="font-extrabold text-slate-900 text-sm">How does the Larnaca (LCA) + Vista Mare stay option work?</h3>
+            <p class="text-slate-600 mt-1.5 leading-relaxed">When booking a flight to or from <strong>Larnaca (LCA)</strong>, you can attach a <strong>Vistamare</strong> room type in Yeni İskele, choose nights, and optionally add a private LCA pick-up transfer.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+            <h3 class="font-extrabold text-slate-900 text-sm">Is my payment information safe on this site?</h3>
+            <p class="text-slate-600 mt-1.5 leading-relaxed">Yes. Card payments run through <strong>Tranzilla</strong> with card number validation, masked card preview, and zero storage of full card numbers or CVV codes in local browser storage.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+            <h3 class="font-extrabold text-slate-900 text-sm">How can I request assistance with passenger details or changes?</h3>
+            <p class="text-slate-600 mt-1.5 leading-relaxed">Contact K.T.A support directly by phone at <strong>+972 3 510 05 99</strong> or by email at <strong>service@ktair.net</strong> with your PNR reference.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0b1936] text-slate-300 mt-auto pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+        <div>
+          <div class="mb-3">
+            <img src="assets/images/logo.png" alt="KTA International" class="h-7 w-auto object-contain drop-shadow-[0_1px_8px_rgba(255,255,255,0.18)]" />
+          </div>
+          <p class="text-xs leading-relaxed text-slate-400">
+            Tour operators, air carriers, charter schedules, and flight reservation services across Israel, Greece, and Cyprus.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">About us & Associates</h4>
+          <ul class="space-y-2 text-xs">
+            <li><button onclick="openInfoModal('about')" class="hover:text-sky-300">About us</button></li>
+            <li><button onclick="openInfoModal('operators')" class="hover:text-sky-300">Tour Operators</button></li>
+            <li><button onclick="openInfoModal('carriers')" class="hover:text-sky-300">Air Carrieres</button></li>
+            <li><button onclick="openInfoModal('connect')" class="hover:text-sky-300">Connect with us</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Travel & Partners</h4>
+          <ul class="space-y-2 text-xs">
+            <li><button onclick="openInfoModal('terms')" class="hover:text-sky-300">Terms & Conditions</button></li>
+            <li><button onclick="openInfoModal('health')" class="hover:text-sky-300">Coronavirus Information</button></li>
+            <li><a href="https://vistamarecyprus.com/" target="_blank" rel="noopener noreferrer" class="text-teal-300 hover:underline">Vista Mare Cyprus (Yeni İskele)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Contact with Us</h4>
+          <p class="text-xs text-slate-300 font-semibold">+ 972 3 510 05 99</p>
+          <p class="text-xs text-sky-300 mt-1">service@ktair.net</p>
+          <p class="text-xs text-teal-300 mt-1">Vista Mare: +90 548 859 00 34</p>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
+        <div>© All rights reserved • K.T.A (ktair.net) • Tranzilla Secured</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth / Sign Up Modal -->
+  <div id="authModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl relative">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 font-bold text-slate-600">✕</button>
+
+      <div id="loginView">
+        <h3 id="authModalTitle" class="text-xl font-extrabold text-slate-900 mb-1">Login</h3>
+        <p class="text-xs text-slate-500 mb-4">Protected with brute-force rate limiting & session timeout.</p>
+        <div id="authErrorMsg" class="hidden mb-3 p-2.5 rounded-xl bg-rose-50 text-rose-700 text-xs font-semibold"></div>
+        <form onsubmit="handleLoginSubmit(event)" class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Email</label>
+            <input id="loginEmail" type="email" required autocomplete="username" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 mb-1">Password</label>
+            <input id="loginPassword" type="password" required autocomplete="current-password" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <button type="submit" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm">
+            Sign In
+          </button>
+        </form>
+        <div class="mt-4 text-center text-xs text-slate-600">
+          Not a Member? <button type="button" onclick="toggleSignupView(true)" class="text-blue-600 font-bold hover:underline">Sign up</button>
+        </div>
+      </div>
+
+      <div id="signupView" class="hidden">
+        <h3 class="text-xl font-extrabold text-slate-900 mb-1">Sign up</h3>
+        <p class="text-xs text-slate-500 mb-4">Create a new K.T.A customer account.</p>
+        <form onsubmit="handleSignupSubmit(event)" class="space-y-3">
+          <div class="grid grid-cols-2 gap-2">
+            <input id="regFirst" type="text" required placeholder="*First Name" class="px-3 py-2 rounded-xl border border-slate-200 text-sm" />
+            <input id="regLast" type="text" required placeholder="*Last Name" class="px-3 py-2 rounded-xl border border-slate-200 text-sm" />
+          </div>
+          <input id="regEmail" type="email" required placeholder="*E-mail" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm" />
+          <input id="regPhone" type="tel" required placeholder="*Phone no" value="+972" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm" />
+          <input id="regPassword" type="password" required minlength="6" placeholder="*Password (min 6 chars)" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm" />
+          <button type="submit" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm">
+            Complete Registration
+          </button>
+        </form>
+        <div class="mt-4 text-center text-xs text-slate-600">
+          Already a member? <button type="button" onclick="toggleSignupView(false)" class="text-blue-600 font-bold hover:underline">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Modal -->
+  <div id="infoModal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+      <button onclick="document.getElementById('infoModal').classList.add('hidden')" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 font-bold text-slate-600">✕</button>
+      <h3 id="infoModalTitle" class="text-xl font-extrabold text-slate-900 mb-3"></h3>
+      <p id="infoModalBody" class="text-sm text-slate-600 leading-relaxed"></p>
+    </div>
+  </div>
+
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/booking.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/admin.js"></script>
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/db.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

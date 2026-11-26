@@ -1,0 +1,32 @@
+/* K.T.A - custom styles (Tailwind loaded via CDN) */
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f4f7fb;
+    color: #0f172a;
+  }
+  .hero-bg {
+    background: linear-gradient(120deg, rgba(11, 25, 54, 0.90) 0%, rgba(15, 52, 108, 0.80) 55%, rgba(14, 116, 144, 0.74) 100%),
+                url('https://images.unsplash.com/photo-1503152394-c571994fd383?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  }
+  .card-3d-wrap {
+    perspective: 1000px;
+  }
+  .card-3d {
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-style: preserve-3d;
+  }
+  .card-3d.flipped {
+    transform: rotateY(180deg);
+  }
+  .card-face {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .card-back {
+    transform: rotateY(180deg);
+  }
+
+  @media (max-width: 1024px) {
+    header.sticky { position: static; }
+  }
+
