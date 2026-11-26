@@ -2071,3 +2071,20 @@ footer a:hover, footer button:hover {
 [class~="border-teal-500"], [class~="border-teal-400"] {
   border-color: #38a9e0 !important;
 }
+
+
+/* Aviation-led homepage hero: commercial passenger aircraft in flight */
+.hero-bg {
+  background-image:
+    linear-gradient(112deg, rgba(5, 28, 52, .92) 0%, rgba(0, 67, 116, .76) 52%, rgba(0, 111, 189, .48) 100%),
+    url('https://images.pexels.com/photos/27821530/pexels-photo-27821530.jpeg?auto=compress&cs=tinysrgb&w=2000');
+  background-position: center 46%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .hero-bg {
+    background-position: 58% center;
+  }
+}
