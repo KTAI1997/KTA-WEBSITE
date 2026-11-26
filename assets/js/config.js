@@ -73,7 +73,7 @@ const DESTINATIONS = [
     name: "Larnaca",
     fromPriceUSD: 140,
     img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80",
-    desc: "Discover Cyprus at your own pace. Explore Larnaca and consider extending your trip with a stay at Vista Mare in Yeni İskele."
+    desc: "Discover Cyprus at your own pace, from the Larnaca waterfront to the island’s eastern coast. You can also explore a selected stay at Vista Mare in Yeni İskele."
   },
   {
     code: "ATH",
@@ -81,7 +81,7 @@ const DESTINATIONS = [
     name: "Athens",
     fromPriceUSD: 185,
     img: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=900&q=80",
-    desc: "Experience the history, culture, and contemporary energy of Greece’s capital, from iconic landmarks to vibrant neighbourhoods."
+    desc: "Discover the heritage and energy of Greece’s capital, from the Acropolis and historic districts to its contemporary dining and culture."
   },
   {
     code: "SKG",
@@ -89,7 +89,7 @@ const DESTINATIONS = [
     name: "Thessaloniki",
     fromPriceUSD: 195,
     img: "https://images.unsplash.com/photo-1589782182703-2aaa69037b5b?auto=format&fit=crop&w=900&q=80",
-    desc: "Explore Greece’s vibrant northern city, known for its waterfront, rich heritage, welcoming atmosphere, and celebrated food scene."
+    desc: "Experience Thessaloniki’s lively waterfront, Byzantine heritage, welcoming neighbourhoods and celebrated local cuisine."
   },
   {
     code: "HER",
@@ -97,7 +97,7 @@ const DESTINATIONS = [
     name: "Heraklion",
     fromPriceUSD: 215,
     img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=80",
-    desc: "Discover Crete’s dynamic capital, a gateway to ancient Minoan history, local cuisine, and the island’s diverse landscapes."
+    desc: "Discover Heraklion, the gateway to Crete’s Minoan heritage, distinctive cuisine and varied coastal landscapes."
   },
   {
     code: "RHO",
@@ -105,7 +105,7 @@ const DESTINATIONS = [
     name: "Rhodes",
     fromPriceUSD: 205,
     img: "https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?auto=format&fit=crop&w=900&q=80",
-    desc: "Enjoy the blend of medieval heritage, picturesque coastlines, and relaxed island living that makes Rhodes a memorable Greek escape."
+    desc: "Explore Rhodes’ medieval Old Town, scenic coastline and relaxed island atmosphere."
   },
   {
     code: "PFO",
@@ -113,6 +113,6 @@ const DESTINATIONS = [
     name: "Paphos",
     fromPriceUSD: 230,
     img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80",
-    desc: "Explore Cyprus’s southwest coast, where archaeological treasures, a scenic harbour, and Mediterranean beaches come together."
+    desc: "Discover Paphos on Cyprus’s southwest coast, with its archaeological heritage, picturesque harbour and Mediterranean beaches."
   }
 ];
