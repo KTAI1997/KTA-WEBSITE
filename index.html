@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://cdn.sheetjs.com https://fonts.googleapis.com https://fonts.gstatic.com https://images.unsplash.com https://direct.tranzila.com 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:;" />
-  <title>K.T.A International | Flights, Travel & Charter Services</title>
+  <title>K.T.A International | Flight Options & Travel Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <link rel="icon" type="image/png" href="assets/images/logo.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <meta name="description" content="Discover flights from Tel Aviv to Greece and Cyprus, tailored charter solutions, and selected accommodation options with K.T.A International." />
+  <meta name="description" content="Explore flight options from Tel Aviv to Greece and Cyprus, charter coordination, and selected accommodation with K.T.A International." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -477,29 +477,29 @@
       <div class="max-w-3xl mb-8">
         <div class="flex flex-wrap items-center gap-2 mb-3">
           <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-xs font-semibold text-sky-200">
-            ✈ K.T.A Aviation & Charter Network
+            ✈ FLIGHT OPTIONS · CHARTER COORDINATION · TRAVEL SERVICES
           </span>
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-xs font-semibold text-emerald-200">
-            🔒 Secured by Tranzilla PCI-DSS
+            PERSONAL TRAVEL SUPPORT
           </span>
         </div>
         <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-          Fly Seamless to Greece & Cyprus with K.T.A
+          Discover Greece & Cyprus with K.T.A International
         </h1>
         <p class="text-slate-200 text-sm sm:text-base mt-3 max-w-2xl">
-          Direct & connecting flights from Tel Aviv (TLV) to Athens, Thessaloniki, Larnaca (LCA), Heraklion, Rhodes & Paphos — with integrated <strong>Vista Mare Cyprus</strong> sea-view stays for LCA passengers.
+          Explore available flight options from Tel Aviv (TLV) to Athens, Thessaloniki, Larnaca, Heraklion, Rhodes and Paphos. Our team also coordinates charter enquiries and selected travel services, with optional <strong>Vista Mare</strong> accommodation for journeys to Cyprus.
         </p>
       </div>
 
-      <!-- Search / Find Reservation Box -->
+      <!-- Search / Manage Booking Box -->
       <div class="bg-white text-slate-900 rounded-3xl shadow-2xl p-5 sm:p-7 border border-slate-100">
         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-5">
           <div class="flex gap-2">
             <button id="tabBookFlight" onclick="switchSearchTab('book')" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#0b1936] text-white transition">
-              Book Flight
+              Book a Flight
             </button>
             <button id="tabFindRes" onclick="switchSearchTab('find')" class="px-4 py-2 rounded-xl text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition">
-              Find Reservation
+              Manage Booking
             </button>
           </div>
 
@@ -515,7 +515,7 @@
           </div>
         </div>
 
-        <!-- Book Flight Form -->
+        <!-- Book a Flight Form -->
         <form id="bookFlightForm" onsubmit="handleSearchFlights(event)" class="space-y-4">
           <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
             <div class="md:col-span-3">
@@ -605,7 +605,7 @@
           </div>
         </form>
 
-        <!-- Find Reservation Form -->
+        <!-- Manage Booking Form -->
         <div id="findReservationBox" class="hidden space-y-4">
           <form onsubmit="handleFindReservation(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
             <div>
@@ -617,7 +617,7 @@
               <input id="pnrLastNameInput" type="text" required placeholder="Passenger Last Name" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-sky-500" />
             </div>
             <button type="submit" class="w-full py-3 px-6 rounded-xl bg-[#0b1936] hover:bg-slate-800 text-white font-bold text-sm transition">
-              Find Reservation
+              Manage Booking
             </button>
           </form>
           <div id="pnrResultBox" class="hidden"></div>
@@ -633,7 +633,7 @@
       <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-5 mb-6">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Interactive Flight & Stay Booking</span>
-          <h2 id="flowTitle" class="text-xl sm:text-2xl font-extrabold text-slate-900">Available Flights & Filters</h2>
+          <h2 id="flowTitle" class="text-xl sm:text-2xl font-extrabold text-slate-900">Explore Available Flights</h2>
         </div>
         <div class="flex items-center gap-2 text-xs font-bold">
           <span id="stepBadge1" class="px-3 py-1.5 rounded-full bg-blue-600 text-white">1. Flights</span>
@@ -651,11 +651,11 @@
             <div>
               <div class="flex flex-wrap items-center gap-2 mb-1.5">
                 <span class="px-2.5 py-0.5 rounded-full bg-teal-400 text-slate-950 text-[11px] font-extrabold uppercase">Larnaca (LCA) Arrival Partner</span>
-                <span class="text-xs text-teal-200 font-semibold">Vistamare Premium Residence & Hotel • Yeni İskele, Cyprus</span>
+                <span class="text-xs text-teal-200 font-semibold">Vista Mare Premium Residence & Hotel • Yeni İskele, Cyprus</span>
               </div>
-              <h3 class="text-lg sm:text-xl font-extrabold">Flying to Larnaca (LCA)? Reserve Your Sea-View Apartment at Vista Mare</h3>
+              <h3 class="text-lg sm:text-xl font-extrabold">Complete Your Cyprus Journey with a Vista Mare Stay</h3>
               <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-3xl">
-                Wake up to Mediterranean sea views in Yeni İskele. Choose from <strong>Standard (Loft)</strong>, <strong>Standard Sea View</strong>, <strong>Standard Mountain View</strong>, or <strong>Deluxe Residence</strong> with optional LCA airport pick-up.
+                Discover accommodation options in Yeni İskele, including <strong>Loft</strong>, <strong>Sea View</strong>, <strong>Mountain View</strong> and <strong>Deluxe Residence</strong> categories. Airport transfer arrangements can be requested separately.
               </p>
             </div>
             <div class="flex flex-wrap items-center gap-2.5 shrink-0">
@@ -943,9 +943,9 @@
             <span class="px-3 py-1 rounded-full bg-teal-400 text-slate-950 text-xs font-extrabold uppercase tracking-wider">Your Cyprus Flight & Stay</span>
             <span class="text-xs text-teal-200 font-semibold">Yeni İskele, Northern Cyprus • +90 548 859 00 34</span>
           </div>
-          <h2 class="text-2xl sm:text-4xl font-extrabold">Vistamare Premium Residence & Hotel</h2>
+          <h2 class="text-2xl sm:text-4xl font-extrabold">Vista Mare Premium Residence & Hotel</h2>
           <p class="text-slate-200 text-sm mt-2 max-w-2xl">
-            Arriving via <strong>Larnaca (LCA)</strong>? Complement your journey with a stay at Vista Mare in Yeni İskele. Explore sea-view and loft accommodation, with selected amenities and optional airport transfer arrangements.
+            Travelling to Cyprus via <strong>Larnaca (LCA)</strong>? Extend your trip with accommodation at Vista Mare in Yeni İskele. Explore available room categories, selected amenities and optional airport transfer arrangements.
           </p>
         </div>
         <a href="https://vistamarecyprus.com/" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition">
@@ -989,14 +989,14 @@
     </div>
   </section>
 
-  <!-- Explore Our Destinations Section -->
+  <!-- Discover Your Next Destination Section -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
     <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
       <div>
         <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Discover More with K.T.A</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Explore Our Destinations</h2>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Discover Your Next Destination</h2>
       </div>
-      <p class="text-sm text-slate-500">Choose a destination to view available flights and begin planning your journey.</p>
+      <p class="text-sm text-slate-500">Browse our featured destinations, review available flight options and start planning your next journey.</p>
     </div>
 
     <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -1009,17 +1009,17 @@
         <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
           <div class="text-xs font-extrabold text-blue-700 uppercase">Verified Carrier & Charter Network</div>
           <div class="text-sm font-extrabold text-slate-900 mt-1">Cyprus Airways, Aegean & Partners</div>
-          <p class="text-xs text-slate-600 mt-1">Scheduled & charter capacity coordination across TLV, LCA, ATH, SKG, HER, RHO & PFO.</p>
+          <p class="text-xs text-slate-600 mt-1">Flight options and charter enquiries for selected routes connecting Tel Aviv, Greece and Cyprus.</p>
         </div>
         <div class="p-4 rounded-2xl bg-teal-50/70 border border-teal-200/80">
           <div class="text-xs font-extrabold text-teal-800 uppercase">Official LCA Stay Partner</div>
           <div class="text-sm font-extrabold text-slate-900 mt-1">Vistamare Yeni İskele</div>
-          <p class="text-xs text-slate-600 mt-1">Sea & mountain view rooms with optional Larnaca Airport (LCA) pick-up transfer.</p>
+          <p class="text-xs text-slate-600 mt-1">Selected accommodation options with sea or mountain views and transfer enquiries from Larnaca Airport.</p>
         </div>
         <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
           <div class="text-xs font-extrabold text-emerald-800 uppercase">Protected Checkout</div>
           <div class="text-sm font-extrabold text-slate-900 mt-1">Tranzilla 3D-Secure</div>
-          <p class="text-xs text-slate-600 mt-1">Encrypted card authorization with Luhn validation and zero card data stored locally.</p>
+          <p class="text-xs text-slate-600 mt-1">Payment options are presented during booking. Any payment is subject to provider authorization and confirmation.</p>
         </div>
         <div class="p-4 rounded-2xl bg-sky-50/70 border border-sky-200/80">
           <div class="text-xs font-extrabold text-sky-800 uppercase">Direct Human Support</div>
@@ -1032,7 +1032,7 @@
         <div class="flex flex-wrap items-end justify-between gap-2 mb-4">
           <div>
             <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Passenger Help Center</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Frequently Asked Questions (FAQ)</h2>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Travel Information & Frequently Asked Questions</h2>
           </div>
           <span class="text-xs text-slate-500">Helpful information for a more confident journey</span>
         </div>
@@ -1040,7 +1040,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
           <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
             <h3 class="font-extrabold text-slate-900 text-sm">How can I access my booking confirmation or travel documents?</h3>
-            <p class="text-slate-600 mt-1.5 leading-relaxed">Choose <strong>Find Reservation</strong>, then enter your booking reference (PNR) and the passenger’s last name. If your reservation is available, you can review the itinerary and access the travel documents provided.</p>
+            <p class="text-slate-600 mt-1.5 leading-relaxed">Choose <strong>Manage Booking</strong>, then enter your booking reference (PNR) and the passenger’s last name. If your reservation is available, you can review the itinerary and access the travel documents provided.</p>
           </div>
           <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
             <h3 class="font-extrabold text-slate-900 text-sm">Can I combine a flight to Larnaca with a Vista Mare stay?</h3>
@@ -1068,7 +1068,7 @@
             <img src="assets/images/logo.png" alt="KTA International" class="h-7 w-auto object-contain drop-shadow-[0_1px_8px_rgba(255,255,255,0.18)]" />
           </div>
           <p class="text-xs leading-relaxed text-slate-400">
-            Connecting travellers and travel partners with flight options, charter coordination, and travel services across Israel, Greece, and Cyprus.
+            Connecting travellers and travel partners with flight options, charter coordination and selected travel services across Israel, Greece and Cyprus.
           </p>
         </div>
 
