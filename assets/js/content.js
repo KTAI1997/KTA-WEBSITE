@@ -3,30 +3,38 @@
 function renderDestinations() {
   const grid = document.getElementById("destinationsGrid");
   grid.innerHTML = DESTINATIONS.map(d => `
-    <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col justify-between hover:shadow-xl transition">
-      <div>
-        <div class="h-44 bg-slate-200 relative overflow-hidden">
-          <img src="${escapeHTML(d.img)}" alt="${escapeHTML(d.name)}" onerror="this.onerror=null;this.src=FALLBACK_DEST_IMG;" class="w-full h-full object-cover" />
-          <span class="absolute top-3 left-3 px-2.5 py-1 rounded-lg bg-[#0b1936]/85 text-white text-[11px] font-bold tracking-wider">
-            ${escapeHTML(d.title)}
+    <article class="destination-card group bg-white rounded-3xl overflow-hidden border border-slate-200/80 flex flex-col">
+      <div class="destination-card__image relative overflow-hidden">
+        <img src="${escapeHTML(d.img)}" alt="${escapeHTML(d.name)}" loading="lazy" onerror="this.onerror=null;this.src=FALLBACK_DEST_IMG;" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <div class="destination-card__image-shade absolute inset-0"></div>
+        <span class="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white/95 text-slate-800 text-[10px] font-extrabold uppercase tracking-wider shadow-lg">
+          ${escapeHTML(d.title)}
+        </span>
+        <div class="absolute bottom-4 left-5 right-5 flex items-end justify-between gap-3 text-white">
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-[.18em] text-white/75 mb-1">Explore destination</div>
+            <h3 class="text-2xl font-extrabold tracking-tight drop-shadow-lg">${escapeHTML(d.name)}</h3>
+          </div>
+          <span class="shrink-0 rounded-xl bg-white/15 border border-white/25 backdrop-blur-md px-3 py-2 text-[10px] font-extrabold shadow-lg">
+            ${escapeHTML(d.code)}
           </span>
         </div>
-        <div class="p-5">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-lg font-extrabold text-slate-900">${escapeHTML(d.name)}</h3>
-            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg">
-              From ${formatMoney(d.fromPriceUSD)}
-            </span>
+      </div>
+      <div class="destination-card__body p-5 sm:p-6 flex flex-col flex-1">
+        <p class="text-sm text-slate-600 leading-relaxed flex-1">${escapeHTML(d.desc)}</p>
+        <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+          <div>
+            <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Flights from</div>
+            <div class="text-xl font-extrabold text-slate-900 tracking-tight">${formatMoney(d.fromPriceUSD)}</div>
+            <div class="text-[10px] text-slate-400">per passenger</div>
           </div>
-          <p class="text-xs text-slate-600 leading-relaxed">${escapeHTML(d.desc)}</p>
+          <button type="button" onclick="quickSelectDestination('${escapeHTML(d.code)}')" class="destination-card__button inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-[#0b1936] hover:bg-blue-700 text-white font-extrabold text-xs shadow-md">
+            Explore flights
+            <span aria-hidden="true" class="text-base leading-none">→</span>
+          </button>
         </div>
       </div>
-      <div class="px-5 pb-5">
-        <button onclick="quickSelectDestination('${escapeHTML(d.code)}')" class="w-full py-2.5 rounded-xl bg-[#0b1936] hover:bg-blue-700 text-white font-bold text-xs transition">
-          Book Now
-        </button>
-      </div>
-    </div>
+    </article>
   `).join("");
 }
 
