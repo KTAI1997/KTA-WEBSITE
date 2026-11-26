@@ -602,3 +602,381 @@ footer a:hover, footer button:hover {
     scroll-behavior: auto !important;
   }
 }
+
+
+/* Passenger details, booking summary and checkout — unified premium treatment */
+#bookingFlowSection #step2Pane,
+#bookingFlowSection #step3Pane {
+  color: #10213d;
+}
+
+#bookingFlowSection #step2Pane .grid.grid-cols-1.lg\\:grid-cols-3,
+#bookingFlowSection #step3Pane .grid.grid-cols-1.lg\\:grid-cols-3 {
+  align-items: start;
+  gap: clamp(1.15rem, 2.5vw, 1.75rem);
+}
+
+#passengerFormsContainer {
+  display: grid;
+  gap: 1rem;
+}
+
+#passengerFormsContainer > div {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1rem, 2.5vw, 1.45rem);
+  border: 1px solid #e1e9f3;
+  border-radius: 1.2rem;
+  background: linear-gradient(145deg, #fff 0%, #f8fbff 100%);
+  box-shadow: 0 8px 24px rgba(15, 35, 70, .045);
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+#passengerFormsContainer > div::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, #38bdf8, #2563eb);
+}
+
+#passengerFormsContainer > div:hover {
+  border-color: #bfdbfe;
+  box-shadow: 0 14px 32px rgba(15, 35, 70, .075);
+}
+
+#passengerFormsContainer h4 {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: 1rem;
+  color: #10213d;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+
+#passengerFormsContainer h4::before {
+  content: "✈";
+  display: inline-grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: .65rem;
+  background: #eaf4ff;
+  color: #2563eb;
+  font-size: .85rem;
+}
+
+#passengerFormsContainer label,
+#passengerForm label.block,
+#paymentForm label.block {
+  display: block;
+  margin-bottom: .4rem;
+  color: #52647d;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .035em;
+}
+
+#passengerFormsContainer input,
+#passengerForm input:not([type="checkbox"]),
+#passengerForm select,
+#paymentForm input,
+#paymentForm select {
+  min-height: 3rem;
+  width: 100%;
+  border: 1px solid #d9e3ef;
+  border-radius: .85rem;
+  background: #fff;
+  color: #10213d;
+  box-shadow: 0 2px 5px rgba(15, 35, 70, .025);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+#passengerFormsContainer input,
+#passengerForm input:not([type="checkbox"]),
+#paymentForm input {
+  padding: .75rem .9rem;
+}
+
+#passengerFormsContainer input:hover,
+#passengerForm input:not([type="checkbox"]):hover,
+#passengerForm select:hover,
+#paymentForm input:hover,
+#paymentForm select:hover {
+  border-color: #a9bfd9;
+}
+
+#passengerFormsContainer input:focus,
+#passengerForm input:focus,
+#passengerForm select:focus,
+#paymentForm input:focus,
+#paymentForm select:focus {
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, .11);
+  outline: none;
+}
+
+#step2VistaAddonBox {
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 28px rgba(13, 148, 136, .07);
+}
+
+#step2VistaAddonBox select,
+#step2VistaAddonBox input[type="number"] {
+  min-height: 3.05rem;
+  border-color: #b9dedb;
+  border-radius: .85rem;
+}
+
+#step2VistaAddonBox input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #0d9488;
+}
+
+#passengerForm > .bg-sky-50\/70 {
+  border-radius: 1.2rem;
+}
+
+#passengerForm > .bg-sky-50\/70 > div > div {
+  border-radius: .9rem;
+}
+
+#passengerForm > .bg-slate-50 {
+  border-color: #e1e9f3;
+  border-radius: 1.2rem;
+  background: #f8fafd;
+}
+
+#passengerForm > .bg-slate-50 h3 {
+  font-size: .9rem;
+  letter-spacing: -.015em;
+}
+
+#summaryStep2,
+#summaryStep3 {
+  position: sticky;
+  top: 6.25rem;
+  padding: 1.35rem;
+  border: 1px solid #dce6f1;
+  border-radius: 1.25rem;
+  background: linear-gradient(155deg, #f8fbff 0%, #f1f6fc 100%);
+  box-shadow: 0 14px 36px rgba(15, 35, 70, .075);
+}
+
+#summaryStep2 h3,
+#summaryStep3 h3 {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 1rem;
+  color: #10213d;
+  font-size: 1rem;
+  letter-spacing: -.025em;
+}
+
+#summaryStep2 h3::before,
+#summaryStep3 h3::before {
+  content: "";
+  width: .55rem;
+  height: 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #38bdf8, #2563eb);
+}
+
+#summaryStep2 > div:first-of-type,
+#summaryStep3 > div:first-of-type {
+  padding: .95rem;
+  border: 1px solid #e2eaf4;
+  border-radius: .95rem;
+  background: #fff;
+}
+
+#summaryStep2 > div:nth-of-type(2),
+#summaryStep3 > div:nth-of-type(2) {
+  padding-block: 1rem;
+  line-height: 1.6;
+}
+
+#summaryStep2 > div:last-child,
+#summaryStep3 > div:last-child {
+  margin-top: .2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d8e3ef;
+}
+
+#summaryStep2 > div:last-child span:last-child,
+#summaryStep3 > div:last-child span:last-child {
+  color: #155eef;
+  font-size: 1.45rem;
+  letter-spacing: -.04em;
+}
+
+#summaryStep2 .bg-teal-50,
+#summaryStep3 .bg-teal-50 {
+  border-radius: .85rem;
+}
+
+#passengerForm button[type="submit"],
+#passengerForm button[type="button"],
+#paymentForm button[type="submit"],
+#paymentForm button[type="button"] {
+  min-height: 3rem;
+  border-radius: .9rem;
+  font-weight: 800;
+}
+
+#passengerForm button[type="submit"],
+#paymentForm button[type="submit"] {
+  box-shadow: 0 10px 22px rgba(37, 99, 235, .18);
+}
+
+#passengerForm button[type="submit"]:hover,
+#paymentForm button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, .23);
+}
+
+#paymentForm > .bg-slate-900 {
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 1.15rem;
+  box-shadow: 0 14px 30px rgba(11, 25, 54, .18);
+}
+
+#paymentForm > .bg-emerald-50 {
+  border-radius: 1.05rem;
+  line-height: 1.65;
+}
+
+#paymentForm .card-3d-wrap {
+  width: min(100%, 27rem);
+  margin-block: .5rem 1.25rem;
+}
+
+#paymentForm .card-3d {
+  min-height: 13rem;
+  border: 1px solid rgba(255,255,255,.2);
+  box-shadow: 0 22px 45px rgba(11, 25, 54, .22);
+}
+
+#paymentForm .card-face {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+#paymentForm .card-face::after {
+  content: "";
+  position: absolute;
+  width: 13rem;
+  height: 13rem;
+  right: -5rem;
+  top: -7rem;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.4rem rgba(255,255,255,.035), 0 0 0 3rem rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+#paymentForm #previewCardNumber {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(1.05rem, 3vw, 1.45rem);
+  letter-spacing: .12em;
+  text-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+#paymentForm #previewCardHolder {
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#paymentForm .grid.grid-cols-1.sm\\:grid-cols-2 {
+  gap: 1rem;
+}
+
+#paymentForm #promoCodeInput {
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+#paymentForm button[onclick="applyPromoCode()"] {
+  min-width: 7.5rem;
+}
+
+#paymentForm #tranzillaPayBtn {
+  min-width: min(100%, 17rem);
+  background-image: linear-gradient(110deg, #059669, #0f9f9a);
+}
+
+#paymentForm #tranzillaPayBtn:hover {
+  background-image: linear-gradient(110deg, #047857, #0f766e);
+}
+
+#paymentForm #tranzillaPayBtn:disabled {
+  cursor: wait;
+  opacity: .72;
+  transform: none;
+}
+
+#step4Pane #ticketConfirmationBox {
+  border-radius: 1.35rem;
+  box-shadow: 0 18px 48px rgba(15, 35, 70, .08);
+}
+
+@media (min-width: 1024px) {
+  #summaryStep2,
+  #summaryStep3 {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  #summaryStep2,
+  #summaryStep3 {
+    position: static;
+  }
+}
+
+@media (max-width: 639px) {
+  #passengerFormsContainer > div {
+    padding: 1rem;
+  }
+
+  #passengerForm > .flex.items-center.justify-between,
+  #paymentForm > .flex.items-center.justify-between {
+    align-items: stretch;
+    flex-direction: column-reverse;
+    gap: .7rem;
+  }
+
+  #passengerForm > .flex.items-center.justify-between button,
+  #paymentForm > .flex.items-center.justify-between button {
+    width: 100%;
+  }
+
+  #paymentForm .card-3d {
+    min-height: 11.5rem;
+  }
+
+  #paymentForm .card-face {
+    padding: 1.15rem;
+  }
+
+  #paymentForm > .flex.gap-2 {
+    flex-wrap: wrap;
+  }
+
+  #paymentForm #promoCodeInput {
+    min-width: 100%;
+  }
+
+  #paymentForm button[onclick="applyPromoCode()"] {
+    width: 100%;
+  }
+}
