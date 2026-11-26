@@ -1745,3 +1745,153 @@ footer > div > .pt-6 {
     align-items: flex-start;
   }
 }
+
+
+/* Booking journey — progress, validation and confirmation states */
+#bookingFlowSection > .bg-white > .flex:first-child {
+  gap: 1rem;
+}
+
+#bookingFlowSection > .bg-white > .flex:first-child > .flex:last-child {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .45rem;
+}
+
+#bookingFlowSection [id^="stepBadge"] {
+  position: relative;
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e4eaf2;
+  border-radius: 999px;
+  padding: .55rem .8rem;
+  background: #f7f9fc;
+  color: #718198;
+  font-size: .68rem;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+#bookingFlowSection #stepBadge1:not(.bg-slate-100),
+#bookingFlowSection #stepBadge2:not(.bg-slate-100),
+#bookingFlowSection #stepBadge3:not(.bg-slate-100),
+#bookingFlowSection #stepBadge4:not(.bg-slate-100) {
+  border-color: #2563eb;
+  background: linear-gradient(110deg,#155eef,#2563eb);
+  color: #fff;
+  box-shadow: 0 6px 15px rgba(37,99,235,.18);
+}
+
+#bookingFlowSection #stepBadge4:not(.bg-slate-100) {
+  border-color: #059669;
+  background: linear-gradient(110deg,#059669,#0d9488);
+  box-shadow: 0 6px 15px rgba(5,150,105,.18);
+}
+
+#bookingFlowSection #flowTitle {
+  line-height: 1.2;
+}
+
+#bookingFlowSection input:invalid:not(:placeholder-shown) {
+  border-color: #fda4af;
+}
+
+#bookingFlowSection input:focus-visible,
+#bookingFlowSection select:focus-visible,
+#bookingFlowSection button:focus-visible,
+#vistaMareSection button:focus-visible,
+#destinationsGrid button:focus-visible,
+footer a:focus-visible,
+footer button:focus-visible {
+  outline: 3px solid rgba(56,189,248,.5);
+  outline-offset: 2px;
+}
+
+#step4Pane {
+  padding-block: .25rem;
+}
+
+#ticketConfirmationBox {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border-color: #a7f3d0;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(16,185,129,.1),transparent 35%),
+    linear-gradient(145deg,#f0fdf8,#fff 65%);
+}
+
+#ticketConfirmationBox::before {
+  content: "✓";
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  margin-bottom: 1rem;
+  border: 1px solid #a7f3d0;
+  border-radius: 1.1rem;
+  background: #d1fae5;
+  color: #047857;
+  font-size: 1.55rem;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(5,150,105,.1);
+}
+
+#ticketConfirmationBox h2,
+#ticketConfirmationBox h3 {
+  color: #064e3b;
+  letter-spacing: -.035em;
+}
+
+#ticketConfirmationBox button,
+#ticketConfirmationBox a {
+  min-height: 2.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .85rem;
+  font-weight: 800;
+}
+
+#bookingFlowSection button:disabled {
+  cursor: not-allowed;
+  filter: saturate(.75);
+  opacity: .65;
+}
+
+@media (max-width: 767px) {
+  #bookingFlowSection > .bg-white > .flex:first-child {
+    display: block;
+  }
+
+  #bookingFlowSection > .bg-white > .flex:first-child > div:last-child {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    margin-top: 1rem;
+  }
+
+  #bookingFlowSection [id^="stepBadge"] {
+    width: 100%;
+    padding-inline: .35rem;
+    font-size: .65rem;
+  }
+
+  #ticketConfirmationBox > .flex,
+  #ticketConfirmationBox .flex.flex-wrap {
+    gap: .6rem;
+  }
+
+  #ticketConfirmationBox button,
+  #ticketConfirmationBox a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  #bookingFlowSection [id^="stepBadge"] {
+    font-size: .59rem;
+  }
+}
