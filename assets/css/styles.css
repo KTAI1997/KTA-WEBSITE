@@ -1922,7 +1922,7 @@ footer button:focus-visible {
 
 @media (max-width: 640px) {
   #vistaMareSection > div {
-    background-position: 58% center;
+    background-position: 58% 64%;
   }
 }
 
