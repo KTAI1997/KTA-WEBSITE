@@ -418,3 +418,187 @@ footer a:hover, footer button:hover {
     padding-inline: .8rem;
   }
 }
+
+
+/* Booking experience — refined search panel and responsive controls */
+#bookingFlowSection {
+  scroll-margin-top: 1.5rem;
+}
+
+#bookingFlowSection > .bg-white {
+  border: 1px solid rgba(148, 163, 184, .22);
+  box-shadow: 0 24px 70px rgba(15, 35, 70, .09);
+}
+
+#bookingFlowSection #flowTitle {
+  letter-spacing: -.035em;
+}
+
+#bookingFlowSection #step1Pane > #lcaVistaBanner {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+#bookingFlowSection #lcaVistaBanner::after {
+  content: "";
+  position: absolute;
+  width: 17rem;
+  height: 17rem;
+  right: -5rem;
+  top: -9rem;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rem rgba(255,255,255,.035), 0 0 0 4rem rgba(255,255,255,.025);
+  pointer-events: none;
+  z-index: -1;
+}
+
+#bookFlightForm {
+  padding: clamp(1rem, 2.5vw, 1.65rem);
+  border: 1px solid #e5edf6;
+  border-radius: 1.35rem;
+  background: linear-gradient(145deg, #fbfdff 0%, #f4f8fd 100%);
+}
+
+#bookFlightForm label.block {
+  color: #53647b;
+  font-size: .67rem;
+  letter-spacing: .09em;
+  font-weight: 800;
+}
+
+#bookFlightForm select,
+#bookFlightForm input[type="date"] {
+  min-height: 3.15rem;
+  border: 1px solid #d8e2ef;
+  background-color: #fff;
+  color: #10213d;
+  border-radius: .85rem;
+  box-shadow: 0 2px 5px rgba(15, 35, 70, .025);
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+#bookFlightForm select:hover,
+#bookFlightForm input[type="date"]:hover {
+  border-color: #9bb9df;
+}
+
+#bookFlightForm select:focus,
+#bookFlightForm input[type="date"]:focus {
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, .12);
+  outline: none;
+}
+
+#bookFlightForm button[type="submit"] {
+  min-height: 3.15rem;
+  border-radius: .9rem;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, .2);
+  letter-spacing: .01em;
+}
+
+#bookFlightForm button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, .25);
+}
+
+#bookFlightForm button[onclick^="swapAirports"] {
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: .9rem;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, .08);
+}
+
+#bookFlightForm input[type="radio"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #2563eb;
+}
+
+#bookFlightForm .grid > div.flex.items-center.justify-between {
+  min-height: 4.35rem;
+  border-color: #e0e8f2;
+  background: #fff;
+  border-radius: .95rem;
+  box-shadow: 0 3px 10px rgba(15, 35, 70, .035);
+}
+
+#bookFlightForm .grid > div.flex.items-center.justify-between button {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: .65rem;
+  color: #1d4ed8;
+  border-color: #dbeafe;
+  font-size: 1rem;
+  transition: background-color .18s ease, transform .18s ease;
+}
+
+#bookFlightForm .grid > div.flex.items-center.justify-between button:hover {
+  background: #eff6ff;
+  transform: scale(1.06);
+}
+
+#bookingFlowSection #tabBookFlight,
+#bookingFlowSection #tabFindRes {
+  min-height: 2.65rem;
+  padding-inline: 1.15rem;
+}
+
+#bookingFlowSection #flightResultsList {
+  padding-top: .25rem;
+}
+
+#bookingFlowSection #step1Pane .grid.grid-cols-1.md\:grid-cols-12 {
+  align-items: end;
+}
+
+@media (min-width: 768px) {
+  #bookFlightForm > .grid:first-child {
+    column-gap: .85rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #bookingFlowSection {
+    padding-inline: .75rem;
+    margin-top: -1.25rem;
+  }
+
+  #bookingFlowSection > .bg-white {
+    padding: 1rem;
+    border-radius: 1.35rem;
+  }
+
+  #bookingFlowSection > .bg-white > .flex:first-child {
+    align-items: flex-start;
+  }
+
+  #bookingFlowSection #stepBadge1,
+  #bookingFlowSection #stepBadge2,
+  #bookingFlowSection #stepBadge3,
+  #bookingFlowSection #stepBadge4 {
+    font-size: .62rem;
+    padding: .35rem .55rem;
+  }
+
+  #bookFlightForm {
+    padding: 1rem;
+  }
+
+  #bookFlightForm button[onclick^="swapAirports"] {
+    width: 100%;
+    height: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bookFlightForm *,
+  #bookingFlowSection #flightResultsList * {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
