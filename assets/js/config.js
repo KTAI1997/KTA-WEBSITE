@@ -25,7 +25,7 @@ const DEFAULT_FLIGHTS = [
 
 // Vista Mare Cyprus Units (Official room types from vistamarecyprus.com — rates checked live on website)
 const FALLBACK_RESORT_IMG = "https://vistamarecyprus.com/wp-content/uploads/2026/10/home-new-1-768x1024.webp";
-const FALLBACK_DEST_IMG = "https://vistamarecyprus.com/wp-content/uploads/2026/10/home-new-1-768x1024.webp";
+const FALLBACK_DEST_IMG = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80";
 
 const VISTA_MARE_UNITS = [
   {
