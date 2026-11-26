@@ -345,3 +345,76 @@ footer a:hover, footer button:hover {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* Destination cards — editorial travel photography treatment */
+#destinationsGrid .destination-card {
+  min-height: 100%;
+  box-shadow: 0 14px 38px rgba(15, 35, 70, .075);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+
+#destinationsGrid .destination-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56, 189, 248, .45);
+  box-shadow: 0 24px 55px rgba(15, 35, 70, .15);
+}
+
+#destinationsGrid .destination-card__image {
+  height: 13.5rem;
+  background: #dbeafe;
+}
+
+#destinationsGrid .destination-card__image-shade {
+  background: linear-gradient(180deg, rgba(5, 18, 42, .06) 15%, rgba(5, 18, 42, .08) 42%, rgba(5, 18, 42, .78) 100%);
+  pointer-events: none;
+}
+
+#destinationsGrid .destination-card__body {
+  min-height: 12rem;
+}
+
+#destinationsGrid .destination-card__button {
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(11, 25, 54, .16);
+}
+
+#destinationsGrid .destination-card__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(11, 25, 54, .22);
+}
+
+/* Flight results: clearer route hierarchy and pricing */
+#flightResultsList > div:not(.p-8) {
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 24px rgba(15, 35, 70, .045);
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+#flightResultsList > div:not(.p-8):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(15, 35, 70, .09);
+}
+
+#flightResultsList button {
+  min-height: 2.85rem;
+  box-shadow: 0 7px 16px rgba(37, 99, 235, .18);
+}
+
+#flightResultsList button:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 639px) {
+  #destinationsGrid .destination-card__image {
+    height: 12.5rem;
+  }
+
+  #destinationsGrid .destination-card__body {
+    min-height: auto;
+  }
+
+  #destinationsGrid .destination-card__button {
+    padding-inline: .8rem;
+  }
+}
