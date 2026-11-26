@@ -1895,3 +1895,33 @@ footer button:focus-visible {
     font-size: .59rem;
   }
 }
+
+/* Vista Mare — official property photography with a refined overlay */
+#vistaMareSection > div {
+  background-image:
+    linear-gradient(112deg, rgba(7, 24, 53, .96) 0%, rgba(8, 39, 73, .88) 48%, rgba(8, 74, 86, .74) 100%),
+    url("https://vistamarecyprus.com/wp-content/uploads/2026/10/home-new-4-600x464.webp") !important;
+  background-size: cover;
+  background-position: center 48%;
+  background-repeat: no-repeat;
+}
+
+#vistaMareGrid img {
+  transition: transform .55s cubic-bezier(.2,.7,.2,1), filter .35s ease;
+  filter: saturate(.94) contrast(1.02);
+}
+
+#vistaMareGrid > div:hover img {
+  transform: scale(1.045);
+  filter: saturate(1.04) contrast(1.04);
+}
+
+#destinationsGrid .destination-card__image img {
+  filter: saturate(.96) contrast(1.02);
+}
+
+@media (max-width: 640px) {
+  #vistaMareSection > div {
+    background-position: 58% center;
+  }
+}
