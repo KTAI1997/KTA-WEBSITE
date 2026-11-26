@@ -14,7 +14,7 @@ function renderDestinations() {
         </span>
         <div class="absolute bottom-4 left-5 right-5 flex items-end justify-between gap-3 text-white">
           <div>
-            <div class="text-[10px] font-bold uppercase tracking-[.18em] text-white/75 mb-1">Your next destination</div>
+            <div class="text-[10px] font-bold uppercase tracking-[.18em] text-white/75 mb-1">Explore this destination</div>
             <h3 class="text-2xl font-extrabold tracking-tight drop-shadow-lg">${escapeHTML(destination.name)}</h3>
           </div>
           <span class="shrink-0 rounded-xl bg-white/15 border border-white/25 backdrop-blur-md px-3 py-2 text-[10px] font-extrabold shadow-lg">
@@ -31,7 +31,7 @@ function renderDestinations() {
             <div class="text-[10px] text-slate-400">per person</div>
           </div>
           <button type="button" onclick="quickSelectDestination('${escapeHTML(destination.code)}')" class="destination-card__button inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-[#0b1936] hover:bg-blue-700 text-white font-extrabold text-xs shadow-md">
-            View Flights
+            View Flight Options
             <span aria-hidden="true" class="text-base leading-none">→</span>
           </button>
         </div>
@@ -48,15 +48,15 @@ function openInfoModal(key) {
     },
     operators: {
       title: "Services for Tour Operators",
-      body: "We support travel partners with group travel coordination, charter planning, passenger manifest assistance, and flight capacity enquiries. Contact our team to discuss your requirements and the options available for your programme."
+      body: "K.T.A supports travel professionals with group travel enquiries, charter coordination, passenger documentation and capacity requests. Contact our team to discuss your programme, operational requirements and available options."
     },
     carriers: {
       title: "Airline & Carrier Partnerships",
-      body: "K.T.A works with airline and aviation partners to coordinate scheduled and charter travel options. Routes, schedules, capacity, and operating arrangements are subject to carrier confirmation."
+      body: "K.T.A coordinates with aviation partners on scheduled and charter travel opportunities. Routes, schedules, aircraft capacity and operating arrangements remain subject to confirmation by the relevant operating carrier."
     },
     connect: {
       title: "Contact K.T.A International",
-      body: "Our team is available to assist with general enquiries and travel support. Call +972 3 510 05 99 or email service@ktair.net. Please include your booking reference when contacting us about an existing reservation."
+      body: "For booking assistance, travel enquiries and partner requests, contact our team by phone at +972 3 510 05 99 or by email at service@ktair.net. Please include your booking reference when enquiring about an existing reservation."
     },
     terms: {
       title: "Booking Terms & Conditions",
