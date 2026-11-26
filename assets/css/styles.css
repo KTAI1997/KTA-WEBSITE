@@ -980,3 +980,171 @@ footer a:hover, footer button:hover {
     width: 100%;
   }
 }
+
+
+/* Mobile navigation — accessible compact drawer */
+.mobile-menu-toggle {
+  display: none;
+  width: 2.65rem;
+  height: 2.65rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: .85rem;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus-visible {
+  border-color: rgba(125,211,252,.6);
+  background: rgba(56,189,248,.16);
+  outline: none;
+}
+
+.mobile-navigation {
+  padding: .4rem 0 1rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+  animation: mobileNavIn .18s ease-out;
+}
+
+.mobile-navigation__group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: .35rem;
+  padding: .9rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.mobile-navigation__eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: .25rem;
+  color: #7dd3fc;
+  font-size: .65rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.mobile-navigation__group button {
+  min-height: 2.65rem;
+  padding: .65rem .75rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: .7rem;
+  background: rgba(255,255,255,.045);
+  color: rgba(255,255,255,.9);
+  text-align: left;
+  font-size: .78rem;
+  font-weight: 650;
+  transition: background .18s ease, border-color .18s ease;
+}
+
+.mobile-navigation__group button:hover,
+.mobile-navigation__group button:focus-visible {
+  border-color: rgba(125,211,252,.35);
+  background: rgba(56,189,248,.13);
+  outline: none;
+}
+
+.mobile-navigation__group .mobile-navigation__highlight {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-color: rgba(45,212,191,.25);
+  background: rgba(13,148,136,.16);
+  color: #99f6e4;
+}
+
+.mobile-navigation__booking {
+  display: flex;
+  width: 100%;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: .85rem;
+  padding: .75rem 1rem;
+  border-radius: .85rem;
+  background: linear-gradient(105deg,#0284c7,#2563eb);
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 850;
+  box-shadow: 0 9px 22px rgba(37,99,235,.22);
+}
+
+@keyframes mobileNavIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 767px) {
+  .mobile-menu-toggle {
+    display: inline-flex;
+  }
+
+  header .max-w-7xl > .flex {
+    gap: .45rem;
+  }
+
+  header .max-w-7xl > .flex > div:first-child img {
+    max-width: 6.2rem;
+    height: 2rem;
+  }
+
+  header .max-w-7xl > .flex > div:last-child {
+    gap: .35rem;
+  }
+
+  header #currUSD,
+  header #currEUR {
+    padding-inline: .4rem;
+    font-size: .62rem;
+  }
+
+  header #langSelect {
+    width: 4.35rem;
+    padding-inline: .3rem;
+    font-size: .65rem;
+  }
+
+  header #authArea button {
+    min-height: 2.35rem;
+    padding-inline: .55rem;
+    font-size: .65rem;
+  }
+}
+
+@media (max-width: 390px) {
+  header .max-w-7xl > .flex > div:first-child img {
+    max-width: 5.25rem;
+  }
+
+  header #currUSD,
+  header #currEUR {
+    padding-inline: .32rem;
+    font-size: .58rem;
+  }
+
+  header #langSelect {
+    width: 3.9rem;
+  }
+
+  header #authArea button {
+    padding-inline: .42rem;
+  }
+
+  .mobile-menu-toggle {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-navigation {
+    animation: none;
+  }
+}
