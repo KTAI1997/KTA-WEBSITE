@@ -1429,3 +1429,160 @@ footer {
     font-size: .75rem;
   }
 }
+
+
+/* Vista Mare and destination discovery — hospitality-led visual polish */
+#vistaMareSection > div {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-image:
+    radial-gradient(ellipse at 100% 0%, rgba(45,212,191,.2), transparent 42%),
+    linear-gradient(135deg,#0b1936 0%,#10345b 56%,#0d5c63 100%);
+  box-shadow: 0 24px 65px rgba(11,25,54,.17);
+}
+
+#vistaMareSection > div::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 28rem;
+  height: 28rem;
+  right: -13rem;
+  bottom: -20rem;
+  border: 1px solid rgba(153,246,228,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2rem rgba(153,246,228,.04), 0 0 0 4rem rgba(153,246,228,.025);
+  pointer-events: none;
+}
+
+#vistaMareSection h2 {
+  max-width: 42rem;
+  letter-spacing: -.045em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+#vistaMareSection #vistaMareGrid > div {
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.75);
+  border-radius: 1.2rem;
+  box-shadow: 0 14px 32px rgba(2,12,32,.18);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+#vistaMareSection #vistaMareGrid > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 22px 42px rgba(2,12,32,.25);
+}
+
+#vistaMareSection #vistaMareGrid > div > div:first-child > div:first-child {
+  height: 12rem;
+  overflow: hidden;
+}
+
+#vistaMareSection #vistaMareGrid img {
+  transition: transform .6s ease;
+}
+
+#vistaMareSection #vistaMareGrid > div:hover img {
+  transform: scale(1.055);
+}
+
+#vistaMareSection #vistaMareGrid h3 {
+  letter-spacing: -.02em;
+}
+
+#vistaMareSection #vistaMareGrid button {
+  min-height: 2.8rem;
+  box-shadow: 0 7px 15px rgba(13,148,136,.16);
+}
+
+#vistaMareSection #vistaMareGrid a {
+  min-height: 2.5rem;
+}
+
+#vistaMareSection input,
+#vistaMareSection select {
+  min-height: 2.9rem;
+  border-radius: .8rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+#vistaMareSection input:focus,
+#vistaMareSection select:focus {
+  border-color: #5eead4;
+  box-shadow: 0 0 0 3px rgba(45,212,191,.15);
+  outline: none;
+}
+
+#destinationsGrid .destination-card {
+  border-color: #e3eaf3;
+  border-radius: 1.35rem;
+  box-shadow: 0 12px 32px rgba(15,35,70,.065);
+}
+
+#destinationsGrid .destination-card__image {
+  height: clamp(13rem, 20vw, 16rem);
+}
+
+#destinationsGrid .destination-card__image img {
+  transition: transform .75s cubic-bezier(.2,.7,.2,1), filter .4s ease;
+}
+
+#destinationsGrid .destination-card:hover .destination-card__image img {
+  filter: saturate(1.08);
+}
+
+#destinationsGrid .destination-card__body {
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+#destinationsGrid .destination-card__body p {
+  color: #586b84;
+  line-height: 1.7;
+}
+
+#destinationsGrid .destination-card__button {
+  min-height: 2.8rem;
+  border-radius: .85rem;
+  letter-spacing: .01em;
+}
+
+#destinationsGrid .destination-card__image > span {
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 767px) {
+  #vistaMareSection {
+    margin-bottom: 3rem;
+  }
+
+  #vistaMareSection > div {
+    padding: 1.15rem;
+  }
+
+  #vistaMareSection > div > div:first-child {
+    align-items: flex-start;
+  }
+
+  #vistaMareSection > div > div:first-child a {
+    width: 100%;
+    text-align: center;
+  }
+
+  #vistaMareSection #vistaMareGrid > div > div:first-child > div:first-child {
+    height: 13rem;
+  }
+
+  #destinationsGrid {
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #vistaMareSection #vistaMareGrid *,
+  #destinationsGrid * {
+    transition-duration: .01ms !important;
+  }
+}
