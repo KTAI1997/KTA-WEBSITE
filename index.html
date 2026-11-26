@@ -74,6 +74,10 @@
           </button>
         </nav>
 
+        <button id="mobileMenuToggle" type="button" class="mobile-menu-toggle md:hidden" aria-label="Open navigation menu" aria-controls="mobileNavigation" aria-expanded="false" onclick="const menu=document.getElementById('mobileNavigation');const opened=menu.classList.toggle('hidden');this.setAttribute('aria-expanded',String(!opened));this.setAttribute('aria-label',opened?'Open navigation menu':'Close navigation menu');this.innerHTML=opened?'☰':'✕';">
+          <span aria-hidden="true">☰</span>
+        </button>
+
         <!-- Right Controls: Currency, Lang, Auth / Admin -->
         <div class="flex items-center gap-2 sm:gap-3">
           <div class="flex items-center bg-white/10 rounded-lg p-0.5 text-xs font-bold">
@@ -97,6 +101,27 @@
           </div>
         </div>
       </div>
+      <nav id="mobileNavigation" class="mobile-navigation hidden md:hidden" aria-label="Mobile navigation">
+        <div class="mobile-navigation__group">
+          <span class="mobile-navigation__eyebrow">Explore K.T.A</span>
+          <button type="button" onclick="openInfoModal('about');closeMobileMenu()">About Us</button>
+          <button type="button" onclick="openInfoModal('operators');closeMobileMenu()">Tour Operators</button>
+          <button type="button" onclick="openInfoModal('carriers');closeMobileMenu()">Air Carriers</button>
+          <button type="button" onclick="openInfoModal('terms');closeMobileMenu()">Terms & Conditions</button>
+          <button type="button" onclick="openInfoModal('health');closeMobileMenu()">Travel & Health Information</button>
+        </div>
+        <div class="mobile-navigation__group">
+          <span class="mobile-navigation__eyebrow">Destinations</span>
+          <button type="button" onclick="quickSelectDestination('ATH');closeMobileMenu()">Athens (ATH)</button>
+          <button type="button" onclick="quickSelectDestination('SKG');closeMobileMenu()">Thessaloniki (SKG)</button>
+          <button type="button" onclick="quickSelectDestination('LCA');closeMobileMenu()">Larnaca (LCA) + Vista Mare</button>
+          <button type="button" onclick="quickSelectDestination('HER');closeMobileMenu()">Heraklion (HER)</button>
+          <button type="button" onclick="quickSelectDestination('RHO');closeMobileMenu()">Rhodes (RHO)</button>
+          <button type="button" onclick="quickSelectDestination('PFO');closeMobileMenu()">Paphos (PFO)</button>
+          <button type="button" class="mobile-navigation__highlight" onclick="scrollToVistaMare();closeMobileMenu()">Discover Vista Mare <span aria-hidden="true">→</span></button>
+        </div>
+        <button type="button" class="mobile-navigation__booking" onclick="document.getElementById('bookingFlowSection').scrollIntoView({behavior:'smooth'});closeMobileMenu()">Book a flight <span aria-hidden="true">→</span></button>
+      </nav>
     </div>
   </header>
 
