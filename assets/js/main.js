@@ -75,3 +75,4 @@ renderAuthHeader();
 updateAdminStats();
 populateDatabaseForm();
 resetIdleTimer();
+refreshFlights();

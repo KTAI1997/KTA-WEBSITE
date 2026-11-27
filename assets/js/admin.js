@@ -90,12 +90,15 @@ function handleExcelFile(event) {
         return;
       }
 
-      state.flights = [...imported, ...state.flights];
-      saveFlights();
-      updateAdminStats();
-      renderFlightResults();
-      logSecurityEvent(`Excel import: ${imported.length} flight(s) uploaded`);
-      showUploadFeedback(`Successfully imported ${imported.length} sanitized flight(s) into the live filter engine.`, true);
+      saveRemoteFlights(imported).then(() => {
+        state.flights = [...imported, ...state.flights];
+        updateAdminStats();
+        renderFlightResults();
+        logSecurityEvent(`Excel import: ${imported.length} flight(s) saved to database`);
+        showUploadFeedback(`Successfully saved ${imported.length} flight(s) to the database.`, true);
+      }).catch(err => {
+        showUploadFeedback("Could not save flights (are you logged in as admin/agent?): " + err.message, false);
+      });
     } catch (err) {
       showUploadFeedback("Error reading Excel/CSV file: " + err.message, false);
     }

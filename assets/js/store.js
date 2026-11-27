@@ -61,16 +61,13 @@ function saveUsers() {
 }
 
 function loadFlights() {
-  const saved = JSON.parse(localStorage.getItem("kta_flights") || "null");
-  if (!saved || !Array.isArray(saved) || saved.length === 0) {
-    localStorage.setItem("kta_flights", JSON.stringify(DEFAULT_FLIGHTS));
-    return [...DEFAULT_FLIGHTS];
-  }
-  return saved;
+  // Flights live in Supabase (see flights-api.js). Defaults are only a fallback.
+  localStorage.removeItem("kta_flights");
+  return [...DEFAULT_FLIGHTS];
 }
 
 function saveFlights() {
-  localStorage.setItem("kta_flights", JSON.stringify(state.flights));
+  // Flight catalogue is stored in Supabase, never in localStorage.
 }
 
 function loadBookings() {
