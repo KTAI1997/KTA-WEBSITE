@@ -2,16 +2,7 @@
 
 const EUR_RATE = 0.92;
 
-const DEFAULT_USERS = [
-  {
-    firstName: "Sami",
-    lastName: "KTA",
-    email: "sami@ktair.net",
-    password: "123456",
-    role: "admin",
-    phone: "+972501234567"
-  }
-];
+const DEFAULT_USERS = []; // Authentication is handled by Supabase; no public default credentials.
 
 const DEFAULT_FLIGHTS = [
   { id: "F1", flightNo: "KTA102", airline: "Cyprus Airways", from: "TLV", to: "LCA", depTime: "10:40", arrTime: "11:45", duration: "1h 05m", stops: 0, cabin: "Economy", priceUSD: 140, seats: 19 },
