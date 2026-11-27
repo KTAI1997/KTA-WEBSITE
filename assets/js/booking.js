@@ -497,29 +497,21 @@ function passesLuhnCheck(numStr) {
   return sum % 10 === 0;
 }
 
-// Tranzilla Gateway Adapter (Ready for live backend signing endpoint)
-async function dispatchToTranzillaGateway(payload) {
-  if (state.tranzilla.endpoint) {
-    // Real backend integration hook for Tranzilla Direct/Iframe handshake
-    const res = await fetch(state.tranzilla.endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    if (!res.ok) throw new Error("Tranzilla gateway declined or unreachable.");
-    return await res.json();
-  }
-  // Simulated Tranzilla authorization response when no live backend URL is configured
-  await new Promise(r => setTimeout(r, 650));
-  return {
-    status: "000",
-    confirmationCode: secureRandomCode("TZ-", 8),
-    terminal: state.tranzilla.terminal
-  };
+// Payments remain disabled until a verified server-side Tranzilla integration
+// and airline booking/ticketing service are deployed. Never simulate authorization.
+async function dispatchToTranzillaGateway() {
+  throw new Error(
+    "Online payment is not available yet. No payment has been taken and no ticket has been issued. Please contact K.T.A for assistance."
+  );
 }
 
 async function processTranzillaPayment(e) {
   e.preventDefault();
+  // Fail closed: this static GitHub Pages app cannot securely authorize payments,
+  // verify gateway callbacks, create airline PNRs, or issue e-tickets.
+  alert("Online payment is temporarily unavailable. No payment has been taken and no ticket has been issued. Please contact K.T.A for assistance.");
+  return;
+
   const cardNum = document.getElementById("cardNumberInput").value.replace(/\s/g, "");
   if (cardNum.length < 13 || !passesLuhnCheck(cardNum)) {
     alert("Card number failed validation (Luhn check). Please enter a valid card number.");
