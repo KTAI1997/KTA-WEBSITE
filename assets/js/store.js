@@ -51,16 +51,13 @@ function saveTranzillaConfig(e) {
 }
 
 function loadUsers() {
-  const saved = JSON.parse(localStorage.getItem("kta_users") || "null");
-  if (!saved || !Array.isArray(saved) || saved.length === 0) {
-    localStorage.setItem("kta_users", JSON.stringify(DEFAULT_USERS));
-    return [...DEFAULT_USERS];
-  }
-  return saved;
+  // Remove legacy browser-stored passwords; Supabase Auth is the sole identity provider.
+  localStorage.removeItem("kta_users");
+  return [];
 }
 
 function saveUsers() {
-  localStorage.setItem("kta_users", JSON.stringify(state.users));
+  // User identities and roles are managed by Supabase, never localStorage.
 }
 
 function loadFlights() {
