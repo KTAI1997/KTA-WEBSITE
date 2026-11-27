@@ -10,10 +10,10 @@ function formatMoney(amountUSD) {
 function setCurrency(curr) {
   state.currency = curr;
   document.getElementById("currUSD").className = curr === "USD"
-    ? "px-2.5 py-1 rounded-md bg-orange-500 text-white transition"
+    ? "px-2.5 py-1 rounded-md bg-sky-500 text-white transition"
     : "px-2.5 py-1 rounded-md text-white hover:bg-sky-500 transition";
   document.getElementById("currEUR").className = curr === "EUR"
-    ? "px-2.5 py-1 rounded-md bg-orange-500 text-white transition"
+    ? "px-2.5 py-1 rounded-md bg-sky-500 text-white transition"
     : "px-2.5 py-1 rounded-md text-white hover:bg-sky-500 transition";
   renderDestinations();
   renderVistaMareCards();
