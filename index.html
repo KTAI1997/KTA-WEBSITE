@@ -811,24 +811,21 @@
             <!-- Tranzilla Security Header -->
             <div class="flex flex-wrap items-center justify-between gap-3 bg-slate-900 text-white px-4 py-3 rounded-2xl">
               <div class="flex items-center gap-2.5">
-                <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-extrabold text-sm">🔒</span>
+                <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center font-extrabold text-sm">!</span>
                 <div>
-                  <div class="text-xs font-extrabold tracking-wide">TRANZILLA SECURE PAYMENT GATEWAY</div>
-                  <div class="text-[11px] text-slate-400">Terminal: <span id="checkoutTzTerminal" class="font-mono text-teal-300">ktairterm</span> • 256-bit TLS & PCI-DSS Level 1</div>
+                  <div class="text-xs font-extrabold tracking-wide">ONLINE PAYMENT ACTIVATION PENDING</div>
+                  <div class="text-[11px] text-slate-300">Secure Tranzilla server integration is not yet connected.</div>
                 </div>
               </div>
-              <span class="px-2.5 py-1 rounded-lg bg-white/10 text-[11px] font-bold text-sky-300">3D-Secure Ready</span>
+              <span class="px-2.5 py-1 rounded-lg bg-amber-400/15 text-[11px] font-bold text-amber-200">Not accepting payments</span>
             </div>
 
-            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs text-emerald-950 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <strong>Zero Card Storage & Instant Issuance:</strong> Your full card number and CVV are processed via Tranzilla and never saved in browser storage. Your PNR and E-Ticket appear immediately after payment.
-              </div>
-              <div class="font-bold text-emerald-800 whitespace-nowrap">Support: +972 3 510 05 99</div>
+            <div class="bg-amber-50 border border-amber-300 rounded-2xl p-4 text-sm text-amber-950">
+              <strong>Online checkout is not active yet.</strong> Please do not enter or send card details on this page. No payment will be processed and no PNR or e-ticket can be issued here until K.T.A's secure server-side Tranzilla integration and ticketing service are connected. For booking assistance, contact <strong>+972 3 510 05 99</strong> or <strong>service@ktair.net</strong>.
             </div>
 
-            <!-- Live 3D Card Preview -->
-            <div class="card-3d-wrap max-w-md mx-auto">
+            <!-- Card entry is intentionally removed until hosted Tranzilla checkout is integrated. -->
+            <div class="hidden" aria-hidden="true">
               <div id="card3D" class="card-3d relative h-52 w-full rounded-2xl shadow-2xl">
                 <!-- Front -->
                 <div class="card-face absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0f295a] via-[#17469e] to-[#0891b2] text-white p-6 flex flex-col justify-between">
@@ -865,8 +862,8 @@
               </div>
             </div>
 
-            <!-- Card Inputs -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Card Inputs are disabled until secure hosted checkout is deployed. -->
+            <div class="hidden">
               <div class="sm:col-span-2">
                 <label class="block text-xs font-bold text-slate-600 mb-1">Cardholder Name</label>
                 <input id="cardHolderInput" type="text" required autocomplete="cc-name" placeholder="Name on Card" oninput="updateCardPreview()" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold uppercase" />
@@ -916,8 +913,8 @@
               <button type="button" onclick="setFlowStep(2)" class="px-5 py-2.5 rounded-xl border border-slate-200 font-bold text-sm text-slate-700 hover:bg-slate-50">
                 ← Back
               </button>
-              <button id="tranzillaPayBtn" type="submit" class="px-7 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-lg shadow-emerald-600/25">
-                Pay via Tranzilla & Issue Ticket
+              <button id="tranzillaPayBtn" type="button" disabled aria-disabled="true" class="px-7 py-3.5 rounded-xl bg-slate-400 text-white font-extrabold text-sm cursor-not-allowed">
+                Online Payment Not Yet Available
               </button>
             </div>
           </form>
@@ -1017,9 +1014,9 @@
           <p class="text-xs text-slate-600 mt-1">Selected accommodation options with sea or mountain views and transfer enquiries from Larnaca Airport.</p>
         </div>
         <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
-          <div class="text-xs font-extrabold text-emerald-800 uppercase">Protected Checkout</div>
-          <div class="text-sm font-extrabold text-slate-900 mt-1">Tranzilla 3D-Secure</div>
-          <p class="text-xs text-slate-600 mt-1">Payment options are presented during booking. Any payment is subject to provider authorization and confirmation.</p>
+          <div class="text-xs font-extrabold text-amber-800 uppercase">Online Checkout</div>
+          <div class="text-sm font-extrabold text-slate-900 mt-1">Activation in Progress</div>
+          <p class="text-xs text-slate-600 mt-1">Online payments will become available after secure gateway and server-side booking verification are completed.</p>
         </div>
         <div class="p-4 rounded-2xl bg-sky-50/70 border border-sky-200/80">
           <div class="text-xs font-extrabold text-sky-800 uppercase">Direct Human Support</div>
