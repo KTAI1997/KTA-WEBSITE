@@ -150,9 +150,6 @@
           <button onclick="switchAdminTab('bookings')" id="adminTabBookings" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
             PNR Bookings
           </button>
-          <button onclick="switchAdminTab('database')" id="adminTabDatabase" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition">
-            Database (DB)
-          </button>
           <button onclick="document.getElementById('adminSection').classList.add('hidden')" class="px-3 py-2 rounded-lg text-xs font-semibold bg-rose-500/20 text-rose-300 hover:bg-rose-500/30">
             Hide
           </button>
@@ -178,8 +175,8 @@
           <div id="adminTranzillaStatus" class="text-base font-extrabold text-teal-400 mt-1.5 font-mono">ktairterm</div>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
-          <div class="text-xs text-slate-400 font-medium">Database Mode</div>
-          <div id="adminDbModeStatus" class="text-base font-extrabold text-purple-300 mt-1.5 font-mono">LOCAL_STORAGE</div>
+          <div class="text-xs text-slate-400 font-medium">Pending Requests</div>
+          <div id="adminPendingCount" class="text-2xl font-extrabold text-purple-300 mt-1">0</div>
         </div>
       </div>
 
@@ -273,21 +270,8 @@
 
       <!-- Tab 3: Users Management -->
       <div id="adminPaneUsers" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6">
-        <h3 class="text-lg font-bold mb-4">Add New User</h3>
-        <form onsubmit="addUserFromAdmin(event)" class="grid grid-cols-1 sm:grid-cols-5 gap-3 mb-6">
-          <input id="newUserFirst" type="text" required placeholder="First Name" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
-          <input id="newUserLast" type="text" required placeholder="Last Name" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
-          <input id="newUserEmail" type="email" required placeholder="Email" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
-          <input id="newUserPass" type="text" required placeholder="Password" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white" />
-          <div class="flex gap-2">
-            <select id="newUserRole" class="px-3 py-2 rounded-xl bg-slate-800 border border-white/15 text-sm text-white flex-1">
-              <option value="admin">admin</option>
-              <option value="agent">agent</option>
-              <option value="customer">customer</option>
-            </select>
-            <button type="submit" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 font-bold text-xs text-white">Add</button>
-          </div>
-        </form>
+        <h3 class="text-lg font-bold mb-1">Registered Users</h3>
+        <p class="text-xs text-slate-400 mb-4">Accounts are created through the website sign-up (Supabase Auth). Roles can only be changed in the Supabase dashboard, never from the browser.</p>
         <div id="adminUsersList" class="space-y-2"></div>
       </div>
 
@@ -295,8 +279,8 @@
       <div id="adminPaneBookings" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 class="text-lg font-bold text-white">Issued Bookings & PNRs List</h3>
-            <p class="text-xs text-slate-400">All generated PNRs, passengers, routes, Tranzilla references, and Vista Mare stays in one list.</p>
+            <h3 class="text-lg font-bold text-white">Booking Requests & PNRs</h3>
+            <p class="text-xs text-slate-400">Reservation requests from customers with passengers, routes, contact details and Vista Mare stays.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
             <input
@@ -345,130 +329,6 @@
         </div>
       </div>
 
-      <!-- Tab 5: Database Connection & Schema Readiness -->
-      <div id="adminPaneDatabase" class="hidden bg-white/5 border border-white/10 rounded-2xl p-6 space-y-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-purple-400/20 text-purple-200 border border-purple-400/30 uppercase">DB Adapter Ready</span>
-              <h3 class="text-lg font-bold text-white">Database Connection Settings & Readiness</h3>
-            </div>
-            <p class="text-xs text-slate-300 mt-1">
-              Store your future database provider, endpoint/URL, API key/token, and table mapping now. When you are ready to connect, switch mode to <strong>REST / Cloud DB</strong> and sync local records.
-            </p>
-          </div>
-          <div class="flex items-center gap-2">
-            <span id="dbConnectionBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-slate-700 text-slate-200 font-mono">
-              MODE: LOCAL_STORAGE
-            </span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <!-- DB Connection Config Form (7 cols) -->
-          <form onsubmit="saveDatabaseConfig(event)" class="lg:col-span-7 bg-slate-800/70 rounded-2xl p-5 border border-white/10 space-y-4 text-xs">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-slate-400 font-bold mb-1">Storage / Driver Mode</label>
-                <select id="dbModeInput" onchange="syncDbUiPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-semibold">
-                  <option value="LOCAL_STORAGE">Local Browser Storage Only (Current)</option>
-                  <option value="REST_API">REST API / Custom Backend (Ready)</option>
-                  <option value="SUPABASE_REST">Supabase PostgREST (Ready)</option>
-                  <option value="FIREBASE_REST">Firebase Firestore REST (Ready)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-slate-400 font-bold mb-1">Environment</label>
-                <select id="dbEnvInput" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-semibold">
-                  <option value="staging">Staging / Sandbox</option>
-                  <option value="production">Production</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-slate-400 font-bold mb-1">Database / API Base URL</label>
-              <input id="dbUrlInput" type="url" placeholder="https://xyz.supabase.co/rest/v1 or https://api.ktair.net/v1" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-slate-400 font-bold mb-1">Public / Anon API Key (Optional)</label>
-                <input id="dbApiKeyInput" type="password" autocomplete="off" placeholder="eyJ... or pk_..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
-              </div>
-              <div>
-                <label class="block text-slate-400 font-bold mb-1">Auth Header Type</label>
-                <select id="dbAuthTypeInput" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-white/15 text-white font-semibold">
-                  <option value="Bearer">Authorization: Bearer &lt;key&gt;</option>
-                  <option value="ApiKey">apikey: &lt;key&gt;</option>
-                  <option value="None">No Key / Cookie Session</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="pt-2 border-t border-white/10">
-              <div class="text-[11px] font-bold text-purple-300 uppercase mb-2">Target Table / Collection Names</div>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label class="block text-slate-400 font-semibold mb-1">Flights Table</label>
-                  <input id="dbTableFlightsInput" type="text" value="flights" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
-                </div>
-                <div>
-                  <label class="block text-slate-400 font-semibold mb-1">Bookings Table</label>
-                  <input id="dbTableBookingsInput" type="text" value="bookings" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
-                </div>
-                <div>
-                  <label class="block text-slate-400 font-semibold mb-1">Users Table</label>
-                  <input id="dbTableUsersInput" type="text" value="users" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-white/15 text-white font-mono" />
-                </div>
-              </div>
-            </div>
-
-            <label class="inline-flex items-center gap-2 text-xs text-slate-200 cursor-pointer pt-1">
-              <input id="dbAutoSyncInput" type="checkbox" class="accent-purple-400" />
-              Mirror writes to remote DB automatically when mode is not <code>LOCAL_STORAGE</code>
-            </label>
-
-            <div id="dbFeedbackBanner" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
-
-            <div class="flex flex-wrap items-center gap-2.5 pt-2">
-              <button type="submit" class="px-4 py-2.5 rounded-xl bg-purple-400 hover:bg-purple-300 text-slate-950 font-extrabold transition">
-                Save DB Settings
-              </button>
-              <button type="button" onclick="testDatabaseConnection()" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold border border-white/15 transition">
-                Test Endpoint
-              </button>
-              <button type="button" onclick="exportLocalSnapshotJSON()" class="px-4 py-2.5 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 font-bold border border-sky-400/30 transition">
-                Export JSON Snapshot
-              </button>
-              <button type="button" onclick="pushLocalSnapshotToDB()" class="px-4 py-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 font-bold border border-emerald-400/30 transition">
-                Sync Local → DB
-              </button>
-            </div>
-          </form>
-
-          <!-- DB Readiness & Adapter Status (5 cols) -->
-          <div class="lg:col-span-5 bg-slate-800/70 rounded-2xl p-5 border border-white/10 flex flex-col justify-between space-y-4 text-xs">
-            <div>
-              <h4 class="text-sm font-extrabold text-purple-300 mb-2">Infrastructure Readiness Checklist</h4>
-              <ul class="space-y-2 text-slate-300">
-                <li>✅ <strong>Database Config Vault:</strong> Provider, URL, auth type, and table names saved locally in <code>kta_db_config</code>.</li>
-                <li>✅ <strong>Centralized DB Adapter (<code>KTA_DB</code>):</strong> Ready for <code>flights</code>, <code>bookings</code>, and <code>users</code> read/write hooks.</li>
-                <li>✅ <strong>JSON Backup & Migration:</strong> Export all flights, bookings, and users anytime before migrating to a live server.</li>
-                <li>⏳ <strong>Live Remote Sync:</strong> Stays safely in <code>LOCAL_STORAGE</code> until you set a URL and switch mode.</li>
-              </ul>
-            </div>
-
-            <div class="bg-slate-950/70 rounded-xl p-3.5 border border-white/10">
-              <div class="flex items-center justify-between text-[11px] font-bold text-slate-400 uppercase mb-1.5">
-                <span>Active Adapter Payload Preview</span>
-                <span id="dbLastTestLabel" class="text-purple-300 font-mono">Not tested</span>
-              </div>
-              <pre id="dbAdapterPreview" class="text-[11px] font-mono text-slate-300 overflow-x-auto whitespace-pre-wrap"></pre>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -825,6 +685,8 @@
               <strong>Online checkout is not active yet.</strong> Please do not enter or send card details on this page. No payment will be processed and no PNR or e-ticket can be issued here until K.T.A's secure server-side Tranzilla integration and ticketing service are connected. For booking assistance, contact <strong>+972 3 510 05 99</strong> or <strong>service@ktair.net</strong>.
             </div>
 
+            <div id="reservationNotice" class="hidden bg-emerald-50 border border-emerald-300 rounded-2xl p-4 text-sm text-emerald-950" role="status"></div>
+
             <!-- Card entry is intentionally removed until hosted Tranzilla checkout is integrated. -->
             <div class="hidden" aria-hidden="true">
               <div id="card3D" class="card-3d relative h-52 w-full rounded-2xl shadow-2xl">
@@ -1171,8 +1033,8 @@
   <script src="assets/js/auth.js"></script>
   <script src="assets/js/admin.js"></script>
   <script src="assets/js/content.js"></script>
-  <script src="assets/js/db.js"></script>
   <script src="assets/js/flights-api.js"></script>
+  <script src="assets/js/bookings-api.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -71,9 +71,11 @@ function saveFlights() {
 }
 
 function loadBookings() {
-  return JSON.parse(localStorage.getItem("kta_bookings") || "[]");
+  // Bookings live in Supabase (see bookings-api.js), never in localStorage.
+  localStorage.removeItem("kta_bookings");
+  return [];
 }
 
 function saveBookings() {
-  localStorage.setItem("kta_bookings", JSON.stringify(state.bookings));
+  // Stored in Supabase.
 }

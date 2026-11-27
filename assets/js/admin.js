@@ -17,9 +17,13 @@ function updateAdminStats() {
   document.getElementById("adminFlightCount").textContent = state.flights.length;
   document.getElementById("catalogTotalLabel").textContent = state.flights.length;
   document.getElementById("adminUserCount").textContent = state.users.length;
-  const totalRevUSD = state.bookings.reduce((sum, b) => sum + (b.totalUSD || 0), 0);
+  const totalRevUSD = state.bookings
+    .filter(b => b.status === "confirmed")
+    .reduce((sum, b) => sum + (b.totalUSD || 0), 0);
   document.getElementById("adminRevenueTotal").textContent = formatMoney(totalRevUSD);
   document.getElementById("adminTranzillaStatus").textContent = state.tranzilla.terminal;
+  const pendingEl = document.getElementById("adminPendingCount");
+  if (pendingEl) pendingEl.textContent = state.bookings.filter(b => b.status === "pending").length;
   renderAdminFlightsTable();
 }
 
@@ -116,52 +120,20 @@ function showUploadFeedback(msg, ok) {
   el.textContent = msg;
 }
 
-function addUserFromAdmin(e) {
-  e.preventDefault();
-  const email = document.getElementById("newUserEmail").value.trim();
-  if (state.users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
-    alert("User with this email already exists.");
-    return;
-  }
-  state.users.push({
-    firstName: document.getElementById("newUserFirst").value.trim(),
-    lastName: document.getElementById("newUserLast").value.trim(),
-    email,
-    password: document.getElementById("newUserPass").value,
-    role: document.getElementById("newUserRole").value,
-    phone: "+972500000000"
-  });
-  saveUsers();
-  updateAdminStats();
-  renderAdminUsers();
-  logSecurityEvent(`Admin added user: ${email}`);
-  e.target.reset();
-}
-
-function deleteUserByEmail(email) {
-  if (email.toLowerCase() === "sami@ktair.net") {
-    alert("Primary admin account Sami cannot be deleted.");
-    return;
-  }
-  state.users = state.users.filter(u => u.email.toLowerCase() !== email.toLowerCase());
-  saveUsers();
-  updateAdminStats();
-  renderAdminUsers();
-  logSecurityEvent(`Admin removed user: ${email}`);
-}
-
 function renderAdminUsers() {
   const box = document.getElementById("adminUsersList");
+  if (!box) return;
+  if (!state.users.length) {
+    box.innerHTML = '<div class="text-xs text-slate-400">No registered users to show.</div>';
+    return;
+  }
   box.innerHTML = state.users.map(u => `
     <div class="flex items-center justify-between bg-slate-800/80 px-4 py-2.5 rounded-xl border border-white/10 text-xs">
       <div>
         <span class="font-bold text-white">${escapeHTML(u.firstName)} ${escapeHTML(u.lastName)}</span>
-        <span class="text-slate-400 ml-2">${escapeHTML(u.email)}</span>
+        <span class="text-slate-400 ml-2">${escapeHTML(u.phone || "")}</span>
         <span class="ml-2 px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-bold uppercase">${escapeHTML(u.role)}</span>
       </div>
-      ${u.email.toLowerCase() !== "sami@ktair.net"
-        ? `<button onclick="deleteUserByEmail('${escapeHTML(u.email)}')" class="text-rose-400 hover:text-rose-300 font-bold">Remove</button>`
-        : `<span class="text-amber-300 font-bold">Primary Admin</span>`}
     </div>
   `).join("");
 }
@@ -176,7 +148,7 @@ function getFilteredAdminBookings() {
     if (!q) return true;
 
     const paxText = (b.passengers || []).map(p => `${p.firstName || ""} ${p.lastName || ""} ${p.doc || ""}`).join(" ");
-    const hay = `${b.pnr || ""} ${b.ticketNo || ""} ${b.tranzillaRef || ""} ${paxText} ${b.flight?.from || ""} ${b.flight?.to || ""} ${b.flight?.flightNo || ""}`.toLowerCase();
+    const hay = `${b.pnr || ""} ${b.ticketNo || ""} ${b.tranzillaRef || ""} ${b.contact?.email || ""} ${b.contact?.phone || ""} ${paxText} ${b.flight?.from || ""} ${b.flight?.to || ""} ${b.flight?.flightNo || ""}`.toLowerCase();
     return hay.includes(q);
   });
 }
@@ -247,7 +219,7 @@ function renderAdminBookings() {
     tbody.innerHTML = `
       <tr>
         <td colspan="7" class="py-8 px-4 text-center text-slate-400 text-xs">
-          ${state.bookings.length ? "No PNRs match your filter." : "No PNR bookings issued yet."}
+          ${state.bookings.length ? "No PNRs match your filter." : "No booking requests yet."}
         </td>
       </tr>`;
     return;
@@ -272,18 +244,19 @@ function renderAdminBookings() {
           <div class="text-[11px] text-slate-400">${escapeHTML(b.createdAt || "")}</div>
         </td>
         <td class="py-3 px-3 whitespace-nowrap">
-          <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-[11px]">Confirmed</span>
-          <div class="text-[11px] font-mono text-teal-300 mt-0.5">${escapeHTML(b.tranzillaRef || "TZ")}</div>
+          <span class="px-2 py-0.5 rounded-full ${b.status === "confirmed" ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"} font-bold text-[11px] uppercase">${escapeHTML(b.status || "pending")}</span>
+          ${b.contact?.email ? `<div class="text-[11px] text-slate-300 mt-0.5">${escapeHTML(b.contact.email)}</div>` : ""}
+          ${b.contact?.phone ? `<div class="text-[11px] text-slate-400">${escapeHTML(b.contact.phone)}</div>` : ""}
         </td>
         <td class="py-3 px-3 font-extrabold text-emerald-400 whitespace-nowrap">${formatMoney(b.totalUSD || 0)}</td>
         <td class="py-3 px-3 text-right whitespace-nowrap">
-          <button
+          ${b.status === "confirmed" ? `<button
             type="button"
             onclick="openPnrFromAdmin('${escapeHTML(b.pnr)}', '${escapeHTML(firstLastName)}')"
             class="px-2.5 py-1.5 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-200 font-bold text-[11px] transition"
           >
             Boarding Pass
-          </button>
+          </button>` : ""}
         </td>
       </tr>
     `;

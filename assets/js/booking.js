@@ -406,7 +406,7 @@ function renderOrderSummary(targetId) {
   `;
 }
 
-function goToPaymentStep(e) {
+async function goToPaymentStep(e) {
   e.preventDefault();
   const firsts = document.querySelectorAll(".pax-first");
   const lasts = document.querySelectorAll(".pax-last");
@@ -424,6 +424,30 @@ function goToPaymentStep(e) {
     email: document.getElementById("contactEmail").value.trim(),
     phone: document.getElementById("contactPhone").value.trim()
   };
+  const { data: sessionData } = window.ktaSupabase
+    ? await window.ktaSupabase.auth.getSession()
+    : { data: null };
+  if (!sessionData || !sessionData.session) {
+    openAuthModal("login");
+    showAuthError("Please log in or create an account to submit your reservation request.");
+    return;
+  }
+
+  const requestKey = JSON.stringify([state.selectedFlight && state.selectedFlight.id, state.passengers, state.contact, state.selectedVistaMare, document.getElementById("searchDepart").value, calculateTotalsUSD().totalUSD]);
+  const notice = document.getElementById("reservationNotice");
+  if (state.lastSavedRequestKey !== requestKey) {
+    try {
+      state.lastSavedRef = await saveBookingRequest();
+      state.lastSavedRequestKey = requestKey;
+    } catch (err) {
+      alert("We could not save your reservation request: " + err.message);
+      return;
+    }
+  }
+  if (notice) {
+    notice.textContent = `Reservation request received. Reference: ${state.lastSavedRef}. No payment has been taken. K.T.A will contact you at ${state.contact.email} to confirm availability and complete payment.`;
+    notice.classList.remove("hidden");
+  }
   document.getElementById("checkoutTzTerminal").textContent = state.tranzilla.terminal;
   renderOrderSummary("summaryStep3");
   setFlowStep(3);

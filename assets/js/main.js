@@ -73,6 +73,5 @@ renderVistaMareCards();
 renderFlightResults();
 renderAuthHeader();
 updateAdminStats();
-populateDatabaseForm();
 resetIdleTimer();
 refreshFlights();

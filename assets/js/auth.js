@@ -49,6 +49,8 @@ async function loadSupabaseProfile(user) {
 async function applySupabaseSession(user) {
   if (!user) {
     state.currentUser = null;
+    state.bookings = [];
+    state.users = [];
     document.getElementById("adminSection")?.classList.add("hidden");
     renderAuthHeader();
     return;
@@ -66,9 +68,8 @@ async function applySupabaseSession(user) {
       if (document.getElementById("tzTerminalInput")) document.getElementById("tzTerminalInput").value = state.tranzilla.terminal;
       if (document.getElementById("tzModeInput")) document.getElementById("tzModeInput").value = state.tranzilla.mode;
       if (document.getElementById("tzEndpointInput")) document.getElementById("tzEndpointInput").value = state.tranzilla.endpoint;
-      if (typeof renderAdminUsers === "function") renderAdminUsers();
-      if (typeof renderAdminBookings === "function") renderAdminBookings();
     }
+    if (typeof refreshStaffData === "function") refreshStaffData();
   } else {
     document.getElementById("adminSection")?.classList.add("hidden");
   }
